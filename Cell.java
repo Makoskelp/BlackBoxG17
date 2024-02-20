@@ -6,8 +6,8 @@ public class Cell {
         return hasAtom;
     }
 
-    public void setAtom(boolean value) {
-        hasAtom = value;
+    public void addAtom() {
+        hasAtom = true;
     }
 
     public boolean isInBoard() {
