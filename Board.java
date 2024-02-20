@@ -27,11 +27,18 @@ public class Board {
         }
     }
 
-    public void addAtom(int a, int r, int c) {
-        if (a < 0 || a > 1 || r < 0 || r > size || c < 0 || c > 2*size-1) {
-            throw new IllegalArgumentException("Coordinates outside of Board");
+    private boolean inBoard(int a, int r, int c) {
+        if (a < 0 || a > 1 || r < 0 || r > size-a || c < 0 || c > 2*size-1) {
+            return false;
         }
         if (!board[a][r][c].isInBoard()) {
+            return false;
+        }
+        return true;
+    }
+
+    public void addAtom(int a, int r, int c) {
+        if (!inBoard(a, r, c)) {
             throw new IllegalArgumentException("Not a valid cell");
         }
 
@@ -39,14 +46,11 @@ public class Board {
     }
 
     public Cell getENeighbour(int a, int r, int c) {
-        if (a < 0 || a > 1 || r < 0 || r > size || c < 0 || c > 2*size-1) {
-            throw new IllegalArgumentException("Coordinates outside of Board");
-        }
-        if (!board[a][r][c].isInBoard()) {
+        if (!inBoard(a, r, c)) {
             throw new IllegalArgumentException("Not a valid cell");
         }
 
-        if (c < 2*size-2 && board[a][r][c+1].isInBoard()) {
+        if (c < 2*size-1 && board[a][r][c+1].isInBoard()) {
             return board[a][r][c+1];
         } else {
             return null;
@@ -54,15 +58,60 @@ public class Board {
     }
 
     public Cell getWNeighbour(int a, int r, int c) {
-        if (a < 0 || a > 1 || r < 0 || r > size || c < 0 || c > 2*size-1) {
-            throw new IllegalArgumentException("Coordinates outside of Board");
-        }
-        if (!board[a][r][c].isInBoard()) {
+        if (!inBoard(a, r, c)) {
             throw new IllegalArgumentException("Not a valid cell");
         }
 
-        if (c > 1 && board[a][r][c].isInBoard()) {
-            return board[a][r][c];
+        if (c > 0 && board[a][r][c].isInBoard()) {
+            return board[a][r][c-1];
+        } else {
+            return null;
+        }
+    }
+
+    public Cell getNENeighbour(int a, int r, int c) {
+        if (!inBoard(a, r, c)) {
+            throw new IllegalArgumentException("Not a valid cell");
+        }
+
+        if (c+a <= 2*size-1 && r-(1-a) >= 0) {
+            return board[1-a][r-(1-a)][c+a];
+        } else {
+            return null;
+        }
+    }
+
+    public Cell getNWNeighbour(int a, int r, int c) {
+        if (!inBoard(a, r, c)) {
+            throw new IllegalArgumentException("Not a valid cell");
+        }
+
+        if(c-(1-a) >= 0 && r-(1-a) >= 0) {
+            return board[1-a][r-(1-a)][c-(1-a)];
+        } else {
+            return null;
+        }
+    }
+
+    public Cell getSENeighbour(int a, int r, int c) {
+        if (!inBoard(a, r, c)) {
+            throw new IllegalArgumentException("Not a valid cell");
+        }
+
+        if (c+a <= 2*size-1 && r+a < size-a) {
+            return board[1-a][r+a][c+a];
+        } else {
+            return null;
+        }
+    }
+
+    public Cell getSWNeighbour(int a, int r, int c) {
+        if (!inBoard(a, r, c)) {
+            throw new IllegalArgumentException("Not a valid cell");
+        }
+
+        if (c-(1-a) >= 0 && r+a < size-a) {
+            return board[1-a][r+a][c-(1-a)];
         } else {
             return null;
         }
