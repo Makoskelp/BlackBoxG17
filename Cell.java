@@ -14,8 +14,12 @@ public class Cell {
         return inBoard;
     }
 
-    public Cell(boolean isInBoard) {
+    public void addToBoard() {
+        inBoard = true;
+    }
+
+    public Cell() {
         hasAtom = false;
-        inBoard = isInBoard;
+        inBoard = false;
     }
 }
