@@ -9,7 +9,7 @@ public class Board {
         }
 
         size = sideLength;
-        board  = new Cell[2][size][];
+        board  = new Cell[2][size][2*size-1];
 
         //top half of board
         for (int i = 0; i < size; i++) {
