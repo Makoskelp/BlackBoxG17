@@ -18,33 +18,30 @@
 
     public class HelloApplication extends Application {
 
-            private static final double HEXAGON_SIZE =  100;
+            private static final double HEXAGON_SIZE =  50;
             private static final double HEXAGON_HEIGHT = Math.sqrt(3) * HEXAGON_SIZE /  2;
 
         @Override
         public void start(Stage primaryStage) {
-            /*primaryStage.setTitle("Hexagon Group with Padding");
-            GridPane gridPane = new GridPane();*/
-            Scene scene = new Scene(gridPane,  800,  600, Color.WHITE);
-/*
+            primaryStage.setTitle("Hexagon Group with Padding");
+            GridPane gridPane = new GridPane();
+            //GridPane gridPane2 = new GridPane();
+            Scene scene = new Scene(gridPane,  800,  600, Color.BLACK);
+
             int numRows =  5;
             int numCols =  5;
 
             for (int row =  0; row < numRows; row++) {
                 for (int col =  0; col < numCols; col++) {
-                    double x = col *  1.5 * HEXAGON_SIZE;
-                    double y = row * HEXAGON_HEIGHT;
-                    if (col %  2 ==  1) {
-                        x =x + (HEXAGON_HEIGHT /  2);
-                    }
-
-                    Polygon hexagon = createHexagon(x, y, HEXAGON_SIZE);
-                    gridPane.add(hexagon, col, row);
+                    Polygon hexagon = createHexagon(1, 1, HEXAGON_SIZE);
+                    gridPane.add(hexagon, 2*col+row%2, row);
                 }
             }
 
             // Set padding for the GridPane
-            gridPane.setPadding(new Insets(50,  50,  50,  50));*/
+            gridPane.setPadding(new Insets(50,  50,  50,  50));
+            gridPane.setHgap(-60);
+            gridPane.setVgap(-13);
 
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -60,7 +57,7 @@
                 hexagon.getPoints().addAll(xPos, yPos);
             }
             hexagon.setFill(Color.BLACK);
-            hexagon.setStroke(Color.BLACK);
+            hexagon.setStroke(Color.YELLOW);
             return hexagon;
         }
 
