@@ -2,7 +2,7 @@ package com.example.myjavafx;
 
 public class Board {
 
-    public Cell[][][] board;
+    private Cell[][][] board;
     private int size;
 
     public Board(int sideLength) {
@@ -29,7 +29,11 @@ public class Board {
         }
     }
 
-    private boolean inBoard(int a, int r, int c) {
+    public int getSize() {
+        return size;
+    }
+
+    public boolean inBoard(int a, int r, int c) {
         if (a < 0 || a > 1 || r < 0 || r > size-a || c < 0 || c > 2*size-1) {
             return false;
         }

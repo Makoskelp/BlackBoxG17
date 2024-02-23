@@ -27,13 +27,17 @@
             //GridPane gridPane2 = new GridPane();
             Scene scene = new Scene(gridPane,  800,  600, Color.BLACK);
 
-            int numRows =  5;
-            int numCols =  5;
+            Board board = new Board(5);
+
+            int numRows =  board.getSize()*2;
+            int numCols =  4*board.getSize()-2;
 
             for (int row =  0; row < numRows; row++) {
                 for (int col =  0; col < numCols; col++) {
-                    Polygon hexagon = createHexagon(1, 1, HEXAGON_SIZE);
-                    gridPane.add(hexagon, 2*col+row%2, row);
+                    if (board.inBoard(row%2, row/2, col)) {
+                        Polygon hexagon = createHexagon(1, 1, HEXAGON_SIZE);
+                        gridPane.add(hexagon, 2*col+row%2, row);
+                    }
                 }
             }
 
