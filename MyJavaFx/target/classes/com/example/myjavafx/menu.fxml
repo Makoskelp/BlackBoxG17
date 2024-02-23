@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="848.0" style="-fx-background-color: Black; -fx-border-color: Yellow; -fx-border-width: 5px;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafx.menuController">
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+   <children>
+      <Label layoutX="310.0" layoutY="90.0" text="BlackBox+" textFill="#ddff02">
+         <font>
+            <Font name="Arial" size="48.0" />
+         </font>
+      </Label>
+      <TextField fx:id="myTextField" layoutX="449.0" layoutY="211.0" onAction="#onEnter" prefHeight="29.0" prefWidth="66.0" />
+      <Label layoutX="310.0" layoutY="206.0" text="Grid size:" textFill="#ddff02">
+         <font>
+            <Font name="Arial" size="33.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
