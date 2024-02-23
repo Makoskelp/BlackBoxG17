@@ -34,6 +34,10 @@
                 for (int col = 0; col < numCols / 2; col++) {
                     if (board.inBoard(row % 2, row / 2, col)) {
                         Polygon hexagon = createHexagon(1, 1, HEXAGON_SIZE);
+                        hexagon.setOnMouseClicked(event -> {
+                            hexagon.setFill(Color.RED);
+                            //to be fixed at a later date board.addAtom(row%2, row/2, col/2);
+                        });
                         gridPane.add(hexagon, 2 * col + row % 2, row);
                     }
                 }
