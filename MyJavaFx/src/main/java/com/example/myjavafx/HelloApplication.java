@@ -13,7 +13,6 @@
     import javafx.scene.transform.Rotate;
 
 
-
     import java.io.IOException;
 
     public class HelloApplication extends Application {
