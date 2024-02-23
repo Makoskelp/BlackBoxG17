@@ -22,7 +22,7 @@ public class Board {
         }
         //bottom half of board
         for (int i = size; i < 2*size-1; i++) {
-            int lineStart = i+1-i%2-size;
+            int lineStart = 1+i/2-size/2;
             for (int j = lineStart; j < 2*size-lineStart-i%2; j++) {
                 board[i%2][i/2][j] = new Cell();
             }

@@ -20,9 +20,9 @@
             primaryStage.setTitle("Hexagon Group with Padding");
             GridPane gridPane = new GridPane();
             //GridPane gridPane2 = new GridPane();
-            Scene scene = new Scene(gridPane,  800,  600, Color.BLACK);
+            Scene scene = new Scene(gridPane,  1920,  1080, Color.BLACK);
 
-            Board board = new Board(4);
+            Board board = new Board(6);
 
             int numRows =  2*board.getSize();
             int numCols =  4*board.getSize()-2;
