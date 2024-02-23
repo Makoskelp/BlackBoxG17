@@ -34,7 +34,7 @@ public class menuController extends Application {
     public void onEnter(ActionEvent ae) {
         int size = Integer.parseInt(myTextField.getText());
         menuStage.close();
-        HelloApplication board1 = new HelloApplication(size);
+        BlackBoxApplication board1 = new BlackBoxApplication(size);
         board1.start(new Stage());
     }
 }

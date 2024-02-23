@@ -9,12 +9,12 @@
     import javafx.scene.transform.Rotate;
     import javafx.stage.Stage;
     
-    public class HelloApplication extends Application {
+    public class BlackBoxApplication extends Application {
     
         private static final double HEXAGON_SIZE = 50;
         private final int size; // Size variable
     
-        public HelloApplication(int size) {
+        public BlackBoxApplication(int size) {
             this.size = size; // Initialize size through constructor
         }
     
@@ -40,8 +40,8 @@
     
             // Set padding for the GridPane
             gridPane.setPadding(new Insets(50, 50, 50, 50));
-            gridPane.setHgap(-60);
-            gridPane.setVgap(-13);
+            gridPane.setHgap(-1.15*HEXAGON_SIZE-2.5);
+            gridPane.setVgap(-0.21*HEXAGON_SIZE-2.5);
     
             primaryStage.setScene(scene);
             primaryStage.show();
