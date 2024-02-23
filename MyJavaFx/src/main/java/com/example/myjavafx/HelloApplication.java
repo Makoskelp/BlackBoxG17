@@ -1,24 +1,19 @@
     package com.example.myjavafx;
 
     import javafx.application.Application;
-    import javafx.fxml.FXMLLoader;
     import javafx.geometry.Insets;
-    import javafx.scene.Group;
     import javafx.scene.shape.Polygon;
     import javafx.scene.Scene;
     import javafx.stage.Stage;
     import javafx.scene.paint.Color;
     import javafx.scene.transform.Rotate;
     import javafx.scene.layout.GridPane;
-    import javafx.scene.transform.Rotate;
 
 
-    import java.io.IOException;
 
     public class HelloApplication extends Application {
 
             private static final double HEXAGON_SIZE =  50;
-            private static final double HEXAGON_HEIGHT = Math.sqrt(3) * HEXAGON_SIZE /  2;
 
         @Override
         public void start(Stage primaryStage) {
