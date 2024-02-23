@@ -15,16 +15,16 @@ public class Board {
 
         //top half of board
         for (int i = 0; i < size; i++) {
-            int lineStart = size/2-(i-1)/2;
+            int lineStart = size/2-(i+1)/2;
             for (int j = lineStart; j < lineStart + size + i; j++) {
-                board[i%2][i/2][j].addToBoard();
+                board[i%2][i/2][j] = new Cell();
             }
         }
         //bottom half of board
         for (int i = size; i < 2*size-1; i++) {
-            int lineStart = 2*(size-1)-i;
-            for (int j = lineStart; j < lineStart + 3*size-1-i; j++) {
-                board[i%2][i/2][j].addToBoard();
+            int lineStart = i-(size-1);
+            for (int j = lineStart; j < lineStart + 2*size-1-i; j++) {
+                board[i%2][i/2][j] = new Cell();
             }
         }
     }
@@ -37,7 +37,7 @@ public class Board {
         if (a < 0 || a > 1 || r < 0 || r > size-a || c < 0 || c > 2*size-1) {
             return false;
         }
-        if (!board[a][r][c].isInBoard()) {
+        if (board[a][r][c] == null) {
             return false;
         }
         return true;
@@ -56,7 +56,7 @@ public class Board {
             throw new IllegalArgumentException("Not a valid cell");
         }
 
-        if (c < 2*size-1 && board[a][r][c+1].isInBoard()) {
+        if (c < 2*size-1 && inBoard(a, r, c+1)) {
             return board[a][r][c+1];
         } else {
             return null;
@@ -68,7 +68,7 @@ public class Board {
             throw new IllegalArgumentException("Not a valid cell");
         }
 
-        if (c > 0 && board[a][r][c].isInBoard()) {
+        if (c > 0 && inBoard(a, r, c)) {
             return board[a][r][c-1];
         } else {
             return null;

@@ -34,7 +34,7 @@
 
             for (int row =  0; row < numRows; row++) {
                 for (int col =  0; col < numCols; col++) {
-                    if (board.inBoard(row%2, row/2, col)) {
+                    if (board.inBoard(row%2, row/2, col/2)) {
                         Polygon hexagon = createHexagon(1, 1, HEXAGON_SIZE);
                         gridPane.add(hexagon, 2*col+row%2, row);
                     }
