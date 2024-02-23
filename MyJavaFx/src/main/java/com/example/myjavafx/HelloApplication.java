@@ -22,7 +22,7 @@
             //GridPane gridPane2 = new GridPane();
             Scene scene = new Scene(gridPane,  1920,  1080, Color.BLACK);
 
-            Board board = new Board(6);
+            Board board = new Board(5);
 
             int numRows =  2*board.getSize();
             int numCols =  4*board.getSize()-2;
