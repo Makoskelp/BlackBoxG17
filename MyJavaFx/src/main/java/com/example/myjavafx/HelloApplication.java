@@ -20,7 +20,7 @@
     
         @Override
         public void start(Stage primaryStage) {
-            primaryStage.setTitle("Hexagon Group with Padding");
+            primaryStage.setTitle("BlackBox+");
             GridPane gridPane = new GridPane();
             Scene scene = new Scene(gridPane, Color.BLACK);
     
