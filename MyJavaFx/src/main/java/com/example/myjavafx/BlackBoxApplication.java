@@ -15,14 +15,15 @@
         private final int size; // Size variable
     
         public BlackBoxApplication(int size) {
-            this.size = size; // Initialize size through constructor
+            this.size = size;
         }
     
         @Override
-        public void start(Stage primaryStage) {
-            primaryStage.setTitle("BlackBox+");
+        public void start(Stage newStage) {
+            newStage.setTitle("BlackBox+");
             GridPane gridPane = new GridPane();
-            Scene scene = new Scene(gridPane, Color.BLACK);
+            Scene scene = new Scene(gridPane);
+            gridPane.setStyle("-fx-background-color: black;");
     
             Board board = new Board(size);
     
@@ -43,8 +44,8 @@
             gridPane.setHgap(-1.15*HEXAGON_SIZE-2.5);
             gridPane.setVgap(-0.21*HEXAGON_SIZE-2.5);
     
-            primaryStage.setScene(scene);
-            primaryStage.show();
+            newStage.setScene(scene);
+            newStage.show();
         }
     
         private Polygon createHexagon(double x, double y, double radius) {

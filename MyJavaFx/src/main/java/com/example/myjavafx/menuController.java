@@ -11,16 +11,16 @@ import javafx.stage.Stage;
 
 public class menuController extends Application {
 
-    private static Stage menuStage;
+    private static Stage boardStage;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        menuStage = primaryStage;
+    public void start(Stage newStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
 
-        primaryStage.setTitle("BlackBox+");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+        boardStage = newStage;
+        boardStage.setTitle("BlackBox+");
+        boardStage.setScene(new Scene(root));
+        boardStage.show();
     }
 
     @FXML
@@ -33,7 +33,7 @@ public class menuController extends Application {
     @FXML
     public void onEnter(ActionEvent ae) {
         int size = Integer.parseInt(myTextField.getText());
-        menuStage.close();
+        boardStage.close();
         BlackBoxApplication board1 = new BlackBoxApplication(size);
         board1.start(new Stage());
     }
