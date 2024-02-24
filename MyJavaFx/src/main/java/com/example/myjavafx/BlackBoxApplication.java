@@ -1,9 +1,9 @@
     package com.example.myjavafx;
 
-    import javafx.application.Application;
-    import javafx.geometry.Insets;
+import javafx.application.Application;
+import javafx.geometry.Insets;
     import javafx.scene.Scene;
-    import javafx.scene.layout.GridPane;
+import javafx.scene.layout.GridPane;
     import javafx.scene.paint.Color;
     import javafx.scene.shape.Polygon;
     import javafx.scene.transform.Rotate;
@@ -34,9 +34,10 @@
                 for (int col = 0; col < numCols / 2; col++) {
                     if (board.inBoard(row % 2, row / 2, col)) {
                         Polygon hexagon = createHexagon(1, 1, HEXAGON_SIZE);
+                        Integer loopRow = row, loopCol = col;
                         hexagon.setOnMouseClicked(event -> {
                             hexagon.setFill(Color.RED);
-                            //to be fixed at a later date board.addAtom(row%2, row/2, col/2);
+                            board.addAtom(loopRow%2, loopRow/2, loopCol);
                         });
                         gridPane.add(hexagon, 2 * col + row % 2, row);
                     }
