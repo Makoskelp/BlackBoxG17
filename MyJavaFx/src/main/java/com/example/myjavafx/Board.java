@@ -51,6 +51,14 @@ public class Board {
         board[a][r][c].addAtom();
     }
 
+    public boolean hasAtom(int a, int r, int c) {
+        if (!inBoard(a, r, c)) {
+            throw new IllegalArgumentException("Not a valid cell");
+        }
+
+        return board[a][r][c].hasAtom();
+    }
+
     public Cell getENeighbour(int a, int r, int c) {
         if (!inBoard(a, r, c)) {
             throw new IllegalArgumentException("Not a valid cell");
