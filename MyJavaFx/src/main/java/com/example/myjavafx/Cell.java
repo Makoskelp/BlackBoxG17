@@ -7,8 +7,8 @@ public class Cell {
         return hasAtom;
     }
 
-    public void addAtom() {
-        hasAtom = true;
+    public void setAtom(boolean value) {
+        hasAtom = value;
     }
 
     public Cell() {

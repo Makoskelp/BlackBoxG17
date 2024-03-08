@@ -43,12 +43,12 @@ public class Board {
         return true;
     }
 
-    public void addAtom(int a, int r, int c) {
+    public void setAtom(int a, int r, int c, boolean value) {
         if (!inBoard(a, r, c)) {
             throw new IllegalArgumentException("Not a valid cell");
         }
 
-        board[a][r][c].addAtom();
+        board[a][r][c].setAtom(value);
     }
 
     public boolean hasAtom(int a, int r, int c) {
