@@ -36,8 +36,16 @@ import javafx.scene.layout.GridPane;
                         Polygon hexagon = createHexagon(1, 1, HEXAGON_SIZE);
                         Integer loopRow = row, loopCol = col;
                         hexagon.setOnMouseClicked(event -> {
-                            hexagon.setFill(Color.RED);
-                            board.setAtom(loopRow%2, loopRow/2, loopCol, true);
+                            if (board.hasAtom(loopRow%2, loopRow/2, loopCol))
+                            {
+                                hexagon.setFill(Color.BLACK);
+                                //remove atom
+                            }
+                            else
+                            {
+                                hexagon.setFill(Color.RED);
+                                board.setAtom(loopRow%2, loopRow/2, loopCol, true);
+                            }
                         });
                         gridPane.add(hexagon, 2 * col + row % 2, row);
                     }
