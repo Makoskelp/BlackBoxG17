@@ -37,7 +37,7 @@ import javafx.scene.layout.GridPane;
                         Integer loopRow = row, loopCol = col;
                         hexagon.setOnMouseClicked(event -> {
                             hexagon.setFill(Color.RED);
-                            board.addAtom(loopRow%2, loopRow/2, loopCol, true);
+                            board.setAtom(loopRow%2, loopRow/2, loopCol, true);
                         });
                         gridPane.add(hexagon, 2 * col + row % 2, row);
                     }
