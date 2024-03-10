@@ -39,7 +39,7 @@ import javafx.scene.layout.GridPane;
                             if (board.hasAtom(loopRow%2, loopRow/2, loopCol))
                             {
                                 hexagon.setFill(Color.BLACK);
-                                //remove atom
+                                board.setAtom(loopRow%2, loopRow/2, loopCol, false);
                             }
                             else
                             {
