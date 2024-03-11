@@ -3,6 +3,7 @@
 import javafx.application.Application;
 import javafx.geometry.Insets;
     import javafx.scene.Scene;
+    import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
     import javafx.scene.paint.Color;
     import javafx.scene.shape.Polygon;
@@ -35,16 +36,24 @@ import javafx.scene.layout.GridPane;
                     if (board.inBoard(row % 2, row / 2, col)) {
                         Polygon hexagon = createHexagon(1, 1, HEXAGON_SIZE);
                         Integer loopRow = row, loopCol = col;
-                        hexagon.setOnMouseClicked(event -> {
-                            if (board.hasAtom(loopRow%2, loopRow/2, loopCol))
+                        hexagon.setOnMouseClicked(e -> {
+                            if (e.isSecondaryButtonDown())
                             {
-                                hexagon.setFill(Color.BLACK);
-                                board.setAtom(loopRow%2, loopRow/2, loopCol, false);
+                                System.out.println(loopRow%2 + " " + loopRow/2 + " " + loopCol);
                             }
                             else
-                            {
-                                hexagon.setFill(Color.RED);
-                                board.setAtom(loopRow%2, loopRow/2, loopCol, true);
+                            { 
+                                System.out.println(loopRow%2 + " " + loopRow/2 + " " + loopCol);
+                                if (board.hasAtom(loopRow%2, loopRow/2, loopCol))
+                                {
+                                    hexagon.setFill(Color.BLACK);
+                                    board.setAtom(loopRow%2, loopRow/2, loopCol, false);
+                                }
+                                else
+                                {
+                                    hexagon.setFill(Color.RED);
+                                    board.setAtom(loopRow%2, loopRow/2, loopCol, true);
+                                }
                             }
                         });
                         gridPane.add(hexagon, 2 * col + row % 2, row);
