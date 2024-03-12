@@ -1,26 +1,30 @@
 package com.example.myjavafx;
 
+//Board represents the board as an object
 public class Board {
 
     private Cell[][][] board;
     private int size;
 
     public Board(int sideLength) {
+        //Checks to see if the length of the board is equal or less than 0
+        //If these board does not have a size or a negative size, we throw an exception
         if (sideLength <= 0) {
             throw new IllegalArgumentException("The board must have a positive size");
         }
 
         size = sideLength;
+        //The board is created using the multiple cells
         board  = new Cell[2][size][2*size-1];
 
-        //top half of board
+        //Creates the top half of board
         for (int i = 0; i < size; i++) {
             int lineStart = size/2-(i+1)/2;
             for (int j = lineStart; j < lineStart + size + i; j++) {
                 board[i%2][i/2][j] = new Cell();
             }
         }
-        //bottom half of board
+        //Creates the bottom half of board
         for (int i = 2*size-2; i >= size; i--) {
             int lineStart = size/2-(2*size-i)/2+(1-i%2);
             for (int j = lineStart; j < lineStart + 3*size-2-i; j++) {
@@ -29,10 +33,12 @@ public class Board {
         }
     }
 
+    //Returns the size of the board
     public int getSize() {
         return size;
     }
 
+    //inBoard checks to see if a specific co-ordinate is within the boards boundaries
     public boolean inBoard(int a, int r, int c) {
         if (a >= 0 && a <= 1 && r >= 0 && r <= size-a && c >= 0 && c < 2*size && board[a][r][c] != null) {
             return true;

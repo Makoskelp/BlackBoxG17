@@ -16,6 +16,8 @@
             <Font name="Arial" size="48.0" />
          </font>
       </Label>
+      <!--This myTextField is used to recieve user input-->
+      <!--Once enter is pressed it calls the onEnter file in menuController-->
       <TextField fx:id="myTextField" layoutX="449.0" layoutY="211.0" onAction="#onEnter" prefHeight="29.0" prefWidth="66.0" />
       <Label layoutX="310.0" layoutY="206.0" text="Grid size:" textFill="#ddff02">
          <font>
