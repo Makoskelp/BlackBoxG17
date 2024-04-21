@@ -315,7 +315,7 @@ public class Board {
         return;
     }
 
-    private void createRandAtoms(int size) {
+    public void createRandAtoms(int size) {
 
         Random rand = new Random();
         int num1 = rand.nextInt(0, size * 2);
@@ -327,7 +327,6 @@ public class Board {
                 num1 = rand.nextInt(0, size * 2);
                 num2 = rand.nextInt(0, size * 2);
                 num3 = rand.nextInt(0, size * 2);
-                //if(board[num1][num2][num3].hasAtom() = cond){
             }
             while (board[num1][num2][num3].hasAtom() == true) {
                 num1 = rand.nextInt(0, size * 2);

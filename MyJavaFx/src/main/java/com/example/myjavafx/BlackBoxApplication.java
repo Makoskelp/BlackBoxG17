@@ -50,6 +50,8 @@ public class BlackBoxApplication extends Application {
         int numRows = 2 * board.getSize();
         int numCols = 4 * board.getSize() - 2;
 
+        board.createRandAtoms(size);
+
         //The outer for loop, stops once the number of rows has been hit
         //It also loops through the rows
         for (int row = 0; row < numRows; row++) {
@@ -69,9 +71,14 @@ public class BlackBoxApplication extends Application {
                     //cast ints to Integers so they can be used in lambda function for mouse click
                     Integer loopRow = row, loopCol = col;
 
-                    if (board.isBorder(row % 2, row / 2, col)) hexagon.setFill(Color.GREEN);
+                    // if (board.isBorder(row % 2, row / 2, col)) hexagon.setFill(Color.GREEN);
 
-                    //Once the user clicks the specific hexagon this is called
+                    if (board.hasAtom(loopRow % 2, loopRow / 2, loopCol))
+                    {
+                        hexagon.setFill(Color.RED);
+                    }
+
+                    //hexagon clicked event
                     hexagon.setOnMouseClicked(e -> {
                         if (e.isSecondaryButtonDown()) {
                             System.out.println(loopRow % 2 + " " + loopRow / 2 + " " + loopCol);
@@ -81,19 +88,6 @@ public class BlackBoxApplication extends Application {
                                 hexagon.setFill(Color.BLACK);
                                 board.setAtom(loopRow % 2, loopRow / 2, loopCol, false);
                             } else {
-                                /*Circle atom = new Circle(40);
-
-                                atom.setFill(Color.YELLOW);
-                                atom.setStroke(Color.rgb(0, 0, 0));
-                                atom.fillProperty();
-
-                                /*Text atomSymbol = new Text("H");
-                                atomSymbol.setFont(Font.font(20));
-                                atomSymbol.setX(50);
-                                atomSymbol.setY(50);
-                                atom.setCenterX(hexagon.getLayoutX());
-                                atom.setCenterY(hexagon.getLayoutY());
-                                hexagon.setOpacity(0);*/
                                 hexagon.setFill(Color.YELLOW);
                                 board.setAtom(loopRow % 2, loopRow / 2, loopCol, true);
                             }
@@ -155,11 +149,4 @@ public class BlackBoxApplication extends Application {
         //Returns the polygon object we have just made
         return hexagon;
     }
-
-    public static void createRays(int size){
-
-        SettingRays board2 = new SettingRays(size);
-        board2.start(new Stage());
-    }
-
 }

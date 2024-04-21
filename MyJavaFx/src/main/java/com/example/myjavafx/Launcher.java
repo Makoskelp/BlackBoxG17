@@ -5,4 +5,3 @@ public class Launcher {
         menuController.main(args);
     }
 }
-
