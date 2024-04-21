@@ -318,20 +318,22 @@ public class Board {
     public void createRandAtoms(int size) {
 
         Random rand = new Random();
-        int num1 = rand.nextInt(0, size * 2);
-        int num2 = rand.nextInt(0, size * 2);
-        int num3 = rand.nextInt(0, size * 2);
 
-        for (int i = 0; i < 6; i++) {
-            while (inBoard(num1, num2, num3) == false) {
-                num1 = rand.nextInt(0, size * 2);
-                num2 = rand.nextInt(0, size * 2);
-                num3 = rand.nextInt(0, size * 2);
+        for (int i = 0; i < size; i++) {
+
+            int num1 = rand.nextInt(0, 1);
+            int num2 = rand.nextInt(0, size);
+            int num3 = rand.nextInt(0, 2 * size - 1);
+
+            while (!inBoard(num1, num2, num3)) {
+                num1 = rand.nextInt(0, 1);
+                num2 = rand.nextInt(0, size);
+                num3 = rand.nextInt(0, 2 * size - 1);
             }
-            while (board[num1][num2][num3].hasAtom() == true) {
-                num1 = rand.nextInt(0, size * 2);
-                num2 = rand.nextInt(0, size * 2);
-                num3 = rand.nextInt(0, size * 2);
+            while (board[num1][num2][num3].hasAtom()) {
+                num1 = rand.nextInt(0, 1);
+                num2 = rand.nextInt(0, size);
+                num3 = rand.nextInt(0, 2 * size - 2);
             }
             board[num1][num2][num3].setAtom(true);
         }
