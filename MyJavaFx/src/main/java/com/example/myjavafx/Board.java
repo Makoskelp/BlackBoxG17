@@ -23,14 +23,14 @@ public class Board {
         for (int i = 0; i < size; i++) {
             int lineStart = size / 2 - (i + 1) / 2;
             for (int j = lineStart; j < lineStart + size + i; j++) {
-                board[i % 2][i / 2][j] = new Cell();
+                board[i % 2][i / 2][j] = new Cell(i == 0 || j == lineStart || j == lineStart + size + i - 1);
             }
         }
         //Creates the bottom half of board
         for (int i = 2 * size - 2; i >= size; i--) {
             int lineStart = size / 2 - (2 * size - i) / 2 + (1 - i % 2);
             for (int j = lineStart; j < lineStart + 3 * size - 2 - i; j++) {
-                board[i % 2][i / 2][j] = new Cell();
+                board[i % 2][i / 2][j] = new Cell(i == 2 * size - 2 || j == lineStart || j == lineStart + 3 * size - 3 - i);
             }
         }
     }
@@ -61,6 +61,14 @@ public class Board {
         }
 
         return board[a][r][c].hasAtom();
+    }
+
+    public boolean isBorder(int a, int r, int c) {
+        if (!inBoard(a, r, c)) {
+            throw new IllegalArgumentException("Not a valid cell");
+        }
+
+        return board[a][r][c].isBorder();
     }
 
     public Cell getENeighbour(int a, int r, int c) {

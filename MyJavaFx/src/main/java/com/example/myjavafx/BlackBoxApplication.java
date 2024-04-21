@@ -66,8 +66,10 @@ public class BlackBoxApplication extends Application {
                     //HEXAGON_SIZE is the size of the hexagon to be created
                     Polygon hexagon = createHexagon(1, 1, HEXAGON_SIZE);
 
-                    //**Dont know what this does**
+                    //cast ints to Integers so they can be used in lambda function for mouse click
                     Integer loopRow = row, loopCol = col;
+
+                    if (board.isBorder(row % 2, row / 2, col)) hexagon.setFill(Color.GREEN);
 
                     //Once the user clicks the specific hexagon this is called
                     hexagon.setOnMouseClicked(e -> {
