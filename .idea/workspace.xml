@@ -4,18 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb9f061f-dc5f-467b-82cc-f759beb30820" name="Changes" comment="" />
+    <list default="true" id="bb9f061f-dc5f-467b-82cc-f759beb30820" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/BlackBoxApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/BlackBoxApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/BlackBoxApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/BlackBoxApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Launcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Launcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Ray.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Ray.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/module-info.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2dYGS3DeyyXJHy9V5X8e5G0bP7Q" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -24,11 +43,14 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.BlackBoxApplication.executor": "Run",
+    "Application.Launcher.executor": "Run",
     "Application.menuController.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Year2/Semester 2/Software Project/BlackBoxG17",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -37,6 +59,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -56,6 +79,9 @@
       <option name="presentableId" value="Default" />
       <updated>1710177594793</updated>
       <workItem from="1710177596151" duration="6366000" />
+      <workItem from="1713554901535" duration="9733000" />
+      <workItem from="1713626737868" duration="30000" />
+      <workItem from="1713728354350" duration="667000" />
     </task>
     <servers />
   </component>

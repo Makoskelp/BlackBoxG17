@@ -1,5 +1,7 @@
 package com.example.myjavafx;
 
+import java.util.Random;
+
 //Board represents the board as an object
 public class Board {
 
@@ -15,20 +17,20 @@ public class Board {
 
         size = sideLength;
         //The board is created using the multiple cells
-        board  = new Cell[2][size][2*size-1];
+        board = new Cell[2][size][2 * size - 1];
 
         //Creates the top half of board
         for (int i = 0; i < size; i++) {
-            int lineStart = size/2-(i+1)/2;
+            int lineStart = size / 2 - (i + 1) / 2;
             for (int j = lineStart; j < lineStart + size + i; j++) {
-                board[i%2][i/2][j] = new Cell();
+                board[i % 2][i / 2][j] = new Cell();
             }
         }
         //Creates the bottom half of board
-        for (int i = 2*size-2; i >= size; i--) {
-            int lineStart = size/2-(2*size-i)/2+(1-i%2);
-            for (int j = lineStart; j < lineStart + 3*size-2-i; j++) {
-                board[i%2][i/2][j] = new Cell();
+        for (int i = 2 * size - 2; i >= size; i--) {
+            int lineStart = size / 2 - (2 * size - i) / 2 + (1 - i % 2);
+            for (int j = lineStart; j < lineStart + 3 * size - 2 - i; j++) {
+                board[i % 2][i / 2][j] = new Cell();
             }
         }
     }
@@ -40,7 +42,7 @@ public class Board {
 
     //inBoard checks to see if a specific co-ordinate is within the boards boundaries
     public boolean inBoard(int a, int r, int c) {
-        if (a >= 0 && a <= 1 && r >= 0 && r <= size-a && c >= 0 && c < 2*size && board[a][r][c] != null) {
+        if (a >= 0 && a <= 1 && r >= 0 && r <= size - a && c >= 0 && c < 2 * size && board[a][r][c] != null) {
             return true;
         } else return false;
     }
@@ -66,8 +68,8 @@ public class Board {
             throw new IllegalArgumentException("Not a valid cell");
         }
 
-        if (c < 2*size-1 && inBoard(a, r, c+1)) {
-            return board[a][r][c+1];
+        if (c < 2 * size - 1 && inBoard(a, r, c + 1)) {
+            return board[a][r][c + 1];
         } else {
             return null;
         }
@@ -78,8 +80,8 @@ public class Board {
             throw new IllegalArgumentException("Not a valid cell");
         }
 
-        if (c > 0 && inBoard(a, r, c-1)) {
-            return board[a][r][c-1];
+        if (c > 0 && inBoard(a, r, c - 1)) {
+            return board[a][r][c - 1];
         } else {
             return null;
         }
@@ -90,8 +92,8 @@ public class Board {
             throw new IllegalArgumentException("Not a valid cell");
         }
 
-        if (inBoard(1-a, r-(1-a), c+a) && c+a <= 2*size-1 && r-(1-a) >= 0) {
-            return board[1-a][r-(1-a)][c+a];
+        if (inBoard(1 - a, r - (1 - a), c + a) && c + a <= 2 * size - 1 && r - (1 - a) >= 0) {
+            return board[1 - a][r - (1 - a)][c + a];
         } else {
             return null;
         }
@@ -102,8 +104,8 @@ public class Board {
             throw new IllegalArgumentException("Not a valid cell");
         }
 
-        if(inBoard(1-a, r-(1-a), c-(1-a)) && c-(1-a) >= 0 && r-(1-a) >= 0) {
-            return board[1-a][r-(1-a)][c-(1-a)];
+        if (inBoard(1 - a, r - (1 - a), c - (1 - a)) && c - (1 - a) >= 0 && r - (1 - a) >= 0) {
+            return board[1 - a][r - (1 - a)][c - (1 - a)];
         } else {
             return null;
         }
@@ -114,8 +116,8 @@ public class Board {
             throw new IllegalArgumentException("Not a valid cell");
         }
 
-        if (inBoard(1-a, r+a, c+a) && c+a <= 2*size-1 && r+a < size-a) {
-            return board[1-a][r+a][c+a];
+        if (inBoard(1 - a, r + a, c + a) && c + a <= 2 * size - 1 && r + a < size - a) {
+            return board[1 - a][r + a][c + a];
         } else {
             return null;
         }
@@ -126,8 +128,8 @@ public class Board {
             throw new IllegalArgumentException("Not a valid cell");
         }
 
-        if (inBoard(1-a, r+a, c-(1-a)) && c-(1-a) >= 0 && r+a < size-a) {
-            return board[1-a][r+a][c-(1-a)];
+        if (inBoard(1 - a, r + a, c - (1 - a)) && c - (1 - a) >= 0 && r + a < size - a) {
+            return board[1 - a][r + a][c - (1 - a)];
         } else {
             return null;
         }
@@ -136,48 +138,48 @@ public class Board {
     private int[] getDirNeighbourPos(int a, int r, int c, int dir) {
         switch (dir) {
             case 0:
-                if (inBoard(1-a, r-(1-a), c+a) && c+a <= 2*size-1 && r-(1-a) >= 0) {
-                    int[] pos = {1-a, r-(1-a), c+a};
+                if (inBoard(1 - a, r - (1 - a), c + a) && c + a <= 2 * size - 1 && r - (1 - a) >= 0) {
+                    int[] pos = {1 - a, r - (1 - a), c + a};
                     return pos;
                 } else {
                     return null;
                 }
             case 1:
-                if (c < 2*size-1 && inBoard(a, r, c+1)) {
-                    int[] pos = {a, r, c+1};
+                if (c < 2 * size - 1 && inBoard(a, r, c + 1)) {
+                    int[] pos = {a, r, c + 1};
                     return pos;
                 } else {
                     return null;
                 }
             case 2:
-                if (inBoard(1-a, r+a, c+a) && c+a <= 2*size-1 && r+a < size-a) {
-                    int[] pos = {1-a, r+a, c+a};
+                if (inBoard(1 - a, r + a, c + a) && c + a <= 2 * size - 1 && r + a < size - a) {
+                    int[] pos = {1 - a, r + a, c + a};
                     return pos;
                 } else {
                     return null;
                 }
             case 3:
-                if (inBoard(1-a, r+a, c-(1-a)) && c-(1-a) >= 0 && r+a < size-a) {
-                    int[] pos = {1-a, r+a, c-(1-a)};
+                if (inBoard(1 - a, r + a, c - (1 - a)) && c - (1 - a) >= 0 && r + a < size - a) {
+                    int[] pos = {1 - a, r + a, c - (1 - a)};
                     return pos;
                 } else {
                     return null;
                 }
             case 4:
                 if (c > 0 && inBoard(a, r, c)) {
-                    int[] pos = {a, r, c-1};
+                    int[] pos = {a, r, c - 1};
                     return pos;
                 } else {
                     return null;
                 }
             case 5:
-                if(inBoard(1-a, r-(1-a), c-(1-a)) && c-(1-a) >= 0 && r-(1-a) >= 0) {
-                    int[] pos = {1-a, r-(1-a), c-(1-a)};
+                if (inBoard(1 - a, r - (1 - a), c - (1 - a)) && c - (1 - a) >= 0 && r - (1 - a) >= 0) {
+                    int[] pos = {1 - a, r - (1 - a), c - (1 - a)};
                     return pos;
                 } else {
                     return null;
                 }
-        
+
             default:
                 return null;
         }
@@ -191,7 +193,7 @@ public class Board {
         if (getRayForwardCellPos(r) == null) {
             return null;
         } else
-        return board[getRayForwardCellPos(r)[0]][getRayForwardCellPos(r)[1]][getRayForwardCellPos(r)[2]];
+            return board[getRayForwardCellPos(r)[0]][getRayForwardCellPos(r)[1]][getRayForwardCellPos(r)[2]];
     }
 
     private int[] getRayRightCellPos(Ray r) {
@@ -202,7 +204,7 @@ public class Board {
         if (getRayRightCellPos(r) == null) {
             return null;
         } else
-        return board[getRayRightCellPos(r)[0]][getRayRightCellPos(r)[1]][getRayRightCellPos(r)[2]];
+            return board[getRayRightCellPos(r)[0]][getRayRightCellPos(r)[1]][getRayRightCellPos(r)[2]];
     }
 
     private int[] getRayLeftCellPos(Ray r) {
@@ -213,7 +215,7 @@ public class Board {
         if (getRayLeftCellPos(r) == null) {
             return null;
         } else
-        return board[getRayLeftCellPos(r)[0]][getRayLeftCellPos(r)[1]][getRayLeftCellPos(r)[2]];
+            return board[getRayLeftCellPos(r)[0]][getRayLeftCellPos(r)[1]][getRayLeftCellPos(r)[2]];
     }
 
     private int[] getRayBackRightCellPos(Ray r) {
@@ -224,7 +226,7 @@ public class Board {
         if (getRayBackRightCellPos(r) == null) {
             return null;
         } else
-        return board[getRayBackRightCellPos(r)[0]][getRayBackRightCellPos(r)[1]][getRayBackRightCellPos(r)[2]];
+            return board[getRayBackRightCellPos(r)[0]][getRayBackRightCellPos(r)[1]][getRayBackRightCellPos(r)[2]];
     }
 
     private int[] getRayBackLeftCellPos(Ray r) {
@@ -235,7 +237,7 @@ public class Board {
         if (getRayBackLeftCellPos(r) == null) {
             return null;
         } else
-        return board[getRayBackLeftCellPos(r)[0]][getRayBackLeftCellPos(r)[1]][getRayBackLeftCellPos(r)[2]];
+            return board[getRayBackLeftCellPos(r)[0]][getRayBackLeftCellPos(r)[1]][getRayBackLeftCellPos(r)[2]];
     }
 
     public void sendRay(int a, int r, int c, int dir) {
@@ -249,13 +251,13 @@ public class Board {
             return;
         } else
 
-        //check ray reflected on entry
-        if (getRayBackLeftCell(ray).hasAtom() || getRayBackRightCell(ray).hasAtom() || getRayLeftCell(ray).hasAtom() || getRayRightCell(ray).hasAtom()) {
-            //return reflected ray marker
+            //check ray reflected on entry
+            if (getRayBackLeftCell(ray).hasAtom() || getRayBackRightCell(ray).hasAtom() || getRayLeftCell(ray).hasAtom() || getRayRightCell(ray).hasAtom()) {
+                //return reflected ray marker
 
-            //end of ray
-            return;
-        }
+                //end of ray
+                return;
+            }
 
         //start ray motion
         ray.move(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2]);
@@ -269,14 +271,14 @@ public class Board {
                     //end of ray
                     return;
                 } else
-            
-                //check ray deflected 120deg right
-                if (getRayForwardCell(ray).hasAtom()) {
-                    ray.rotate(2);
-                } else
 
-                //ray deflected 60deg right
-                ray.rotate(1);
+                    //check ray deflected 120deg right
+                    if (getRayForwardCell(ray).hasAtom()) {
+                        ray.rotate(2);
+                    } else
+
+                        //ray deflected 60deg right
+                        ray.rotate(1);
 
             } else if (getRayRightCell(ray).hasAtom()) {
                 //check ray deflected 120deg left
@@ -284,25 +286,49 @@ public class Board {
                     ray.rotate(-2);
                 } else
 
-                //ray deflected 60deg left
-                ray.rotate(-1);
+                    //ray deflected 60deg left
+                    ray.rotate(-1);
             } else
 
-            //check ray absorbed
-            if (getRayForwardCell(ray).hasAtom()) {
-                //return absorbed ray marker
-    
-                //stop ray
-                return;
-            }
+                //check ray absorbed
+                if (getRayForwardCell(ray).hasAtom()) {
+                    //return absorbed ray marker
+
+                    //stop ray
+                    return;
+                }
 
             //move ray
             ray.move(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2]);
         }
         //return regular ray marker
-        
+
         //end of ray
         return;
     }
+
+    private void createRandAtoms(int size) {
+
+        Random rand = new Random();
+        int num1 = rand.nextInt(0, size * 2);
+        int num2 = rand.nextInt(0, size * 2);
+        int num3 = rand.nextInt(0, size * 2);
+
+        for (int i = 0; i < 6; i++) {
+            while (inBoard(num1, num2, num3) == false) {
+                num1 = rand.nextInt(0, size * 2);
+                num2 = rand.nextInt(0, size * 2);
+                num3 = rand.nextInt(0, size * 2);
+                //if(board[num1][num2][num3].hasAtom() = cond){
+            }
+            while (board[num1][num2][num3].hasAtom() == true) {
+                num1 = rand.nextInt(0, size * 2);
+                num2 = rand.nextInt(0, size * 2);
+                num3 = rand.nextInt(0, size * 2);
+            }
+            board[num1][num2][num3].setAtom(true);
+        }
+    }
+
 
 }

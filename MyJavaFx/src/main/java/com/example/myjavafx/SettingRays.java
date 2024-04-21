@@ -14,13 +14,15 @@ import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
-public class BlackBoxApplication extends Application {
+public class SettingRays extends Application {
 
     //Sets the default size of each hexagon
     private static final double HEXAGON_SIZE = 50;
     private final int size; // Size variable
 
-    public BlackBoxApplication(int size) {
+    private int atomsEntered = 0;
+
+    public SettingRays(int size) {
         this.size = size;
     }
 
@@ -78,6 +80,7 @@ public class BlackBoxApplication extends Application {
                             if (board.hasAtom(loopRow % 2, loopRow / 2, loopCol)) {
                                 hexagon.setFill(Color.BLACK);
                                 board.setAtom(loopRow % 2, loopRow / 2, loopCol, false);
+                                atomsEntered--;
                             } else {
                                 /*Circle atom = new Circle(40);
 
@@ -92,8 +95,9 @@ public class BlackBoxApplication extends Application {
                                 atom.setCenterX(hexagon.getLayoutX());
                                 atom.setCenterY(hexagon.getLayoutY());
                                 hexagon.setOpacity(0);*/
-                                hexagon.setFill(Color.YELLOW);
+                                hexagon.setFill(Color.BLUE);
                                 board.setAtom(loopRow % 2, loopRow / 2, loopCol, true);
+                                atomsEntered++;
                             }
                         }
                     });
@@ -154,10 +158,8 @@ public class BlackBoxApplication extends Application {
         return hexagon;
     }
 
-    public static void createRays(int size){
+    /*public static int findRayFinalPosition(){
 
-        SettingRays board2 = new SettingRays(size);
-        board2.start(new Stage());
-    }
+    };*/
 
 }

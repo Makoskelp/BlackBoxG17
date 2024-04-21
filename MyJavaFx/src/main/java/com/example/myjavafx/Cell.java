@@ -23,4 +23,5 @@ public class Cell {
     public Cell() {
         hasAtom = false;
     }
+
 }
