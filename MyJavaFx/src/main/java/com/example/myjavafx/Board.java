@@ -315,7 +315,7 @@ public class Board {
         return;
     }
 
-    public void createRandAtoms(int size) {
+    public void createRandAtoms() {
 
         Random rand = new Random();
 
