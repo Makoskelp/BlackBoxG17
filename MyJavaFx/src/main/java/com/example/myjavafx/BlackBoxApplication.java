@@ -3,14 +3,9 @@ package com.example.myjavafx;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Sphere;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
@@ -79,20 +74,13 @@ public class BlackBoxApplication extends Application {
                     }
 
                     //hexagon clicked event
-                    hexagon.setOnMouseClicked(e -> {
-                        if (e.isSecondaryButtonDown()) {
-                            System.out.println(loopRow % 2 + " " + loopRow / 2 + " " + loopCol);
-                        } else {
-                            System.out.println(loopRow % 2 + " " + loopRow / 2 + " " + loopCol);
-                            if (board.hasAtom(loopRow % 2, loopRow / 2, loopCol)) {
-                                hexagon.setFill(Color.BLACK);
-                                board.setAtom(loopRow % 2, loopRow / 2, loopCol, false);
-                            } else {
-                                hexagon.setFill(Color.YELLOW);
-                                board.setAtom(loopRow % 2, loopRow / 2, loopCol, true);
-                            }
-                        }
-                    });
+                    if (board.isBorder(row % 2, row / 2, col))
+                    {
+                        hexagon.setFill(Color.GREEN);
+                        hexagon.setOnMouseClicked(e -> {
+                            resetGrid();
+                        });
+                    }
                     gridPane.add(hexagon, 2 * col + row % 2, row);
                 }
             }
@@ -148,5 +136,10 @@ public class BlackBoxApplication extends Application {
 
         //Returns the polygon object we have just made
         return hexagon;
+    }
+
+    private void resetGrid()
+    {
+
     }
 }
