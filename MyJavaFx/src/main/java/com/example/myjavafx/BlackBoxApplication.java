@@ -50,7 +50,7 @@ public class BlackBoxApplication extends Application {
         int numRows = 2 * board.getSize();
         int numCols = 4 * board.getSize() - 2;
 
-        board.createRandAtoms(size);
+        board.createRandAtoms();
 
         //The outer for loop, stops once the number of rows has been hit
         //It also loops through the rows
@@ -71,7 +71,7 @@ public class BlackBoxApplication extends Application {
                     //cast ints to Integers so they can be used in lambda function for mouse click
                     Integer loopRow = row, loopCol = col;
 
-                    // if (board.isBorder(row % 2, row / 2, col)) hexagon.setFill(Color.GREEN);
+                    if (board.isBorder(row % 2, row / 2, col)) hexagon.setFill(Color.GREEN);
 
                     if (board.hasAtom(loopRow % 2, loopRow / 2, loopCol))
                     {
