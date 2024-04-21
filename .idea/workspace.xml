@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb9f061f-dc5f-467b-82cc-f759beb30820" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/BlackBoxApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/BlackBoxApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Launcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/BlackBoxApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/BlackBoxApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Cell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Launcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Launcher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Ray.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Ray.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/module-info.class" afterDir="false" />
-    </list>
+    <list default="true" id="bb9f061f-dc5f-467b-82cc-f759beb30820" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
