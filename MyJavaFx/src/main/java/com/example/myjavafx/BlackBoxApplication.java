@@ -80,7 +80,7 @@ public class BlackBoxApplication extends Application {
                     {
                         hexagon.setFill(Color.GREEN);
                         hexagon.setOnMouseClicked(e -> {
-                            resetGrid();
+                            clearBoard(board, gridPane);
                             for (int i = 0; i < 6; i++) {
                                 Integer j = i;
                                 int[] pos = board.getDirNeighbourPos(loopRow % 2, loopRow / 2, loopCol, i);
@@ -151,11 +151,6 @@ public class BlackBoxApplication extends Application {
         return hexagon;
     }
 
-    private void resetGrid()
-    {
-
-    }
-
     private Polygon getHexagon(final int row, final int col, GridPane gp) {
         Polygon node = null;
         ObservableList<Node> children = gp.getChildren();
@@ -167,5 +162,25 @@ public class BlackBoxApplication extends Application {
             }
         }
         return node;
+    }
+
+    private void clearBoard(Board board, GridPane gridPane)
+    {
+        int numRows = 2 * board.getSize();
+        int numCols = 4 * board.getSize() - 2;
+    
+        for (int row = 0; row < numRows; row++)
+        {
+            for (int col = 0; col < numCols / 2; col++)
+            {
+                // Get the hexagon for the current row and column
+                Polygon hexagon = getHexagon((row / 2)*2+(row % 2), 2*col+(row % 2), gridPane);
+    
+                // Check if hexagon is not null before setting its fill color
+                if (hexagon != null) {
+                    hexagon.setFill(Color.BLACK);
+                }
+            }
+        }
     }
 }
