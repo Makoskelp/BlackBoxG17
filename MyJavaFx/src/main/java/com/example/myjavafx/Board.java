@@ -57,7 +57,7 @@ public class Board {
 
     public boolean hasAtom(int a, int r, int c) {
         if (!inBoard(a, r, c)) {
-            throw new IllegalArgumentException("Not a valid cell");
+            return false;
         }
 
         return board[a][r][c].hasAtom();
@@ -71,78 +71,6 @@ public class Board {
         return board[a][r][c].isBorder();
     }
 
-    public Cell getENeighbour(int a, int r, int c) {
-        if (!inBoard(a, r, c)) {
-            throw new IllegalArgumentException("Not a valid cell");
-        }
-
-        if (c < 2 * size - 1 && inBoard(a, r, c + 1)) {
-            return board[a][r][c + 1];
-        } else {
-            return null;
-        }
-    }
-
-    public Cell getWNeighbour(int a, int r, int c) {
-        if (!inBoard(a, r, c)) {
-            throw new IllegalArgumentException("Not a valid cell");
-        }
-
-        if (c > 0 && inBoard(a, r, c - 1)) {
-            return board[a][r][c - 1];
-        } else {
-            return null;
-        }
-    }
-
-    public Cell getNENeighbour(int a, int r, int c) {
-        if (!inBoard(a, r, c)) {
-            throw new IllegalArgumentException("Not a valid cell");
-        }
-
-        if (inBoard(1 - a, r - (1 - a), c + a) && c + a <= 2 * size - 1 && r - (1 - a) >= 0) {
-            return board[1 - a][r - (1 - a)][c + a];
-        } else {
-            return null;
-        }
-    }
-
-    public Cell getNWNeighbour(int a, int r, int c) {
-        if (!inBoard(a, r, c)) {
-            throw new IllegalArgumentException("Not a valid cell");
-        }
-
-        if (inBoard(1 - a, r - (1 - a), c - (1 - a)) && c - (1 - a) >= 0 && r - (1 - a) >= 0) {
-            return board[1 - a][r - (1 - a)][c - (1 - a)];
-        } else {
-            return null;
-        }
-    }
-
-    public Cell getSENeighbour(int a, int r, int c) {
-        if (!inBoard(a, r, c)) {
-            throw new IllegalArgumentException("Not a valid cell");
-        }
-
-        if (inBoard(1 - a, r + a, c + a) && c + a <= 2 * size - 1 && r + a < size - a) {
-            return board[1 - a][r + a][c + a];
-        } else {
-            return null;
-        }
-    }
-
-    public Cell getSWNeighbour(int a, int r, int c) {
-        if (!inBoard(a, r, c)) {
-            throw new IllegalArgumentException("Not a valid cell");
-        }
-
-        if (inBoard(1 - a, r + a, c - (1 - a)) && c - (1 - a) >= 0 && r + a < size - a) {
-            return board[1 - a][r + a][c - (1 - a)];
-        } else {
-            return null;
-        }
-    }
-
     public int[] getDirNeighbourPos(int a, int r, int c, int dir) {
         switch (dir) {
             case 0:
@@ -150,46 +78,46 @@ public class Board {
                     int[] pos = {1 - a, r - (1 - a), c + a};
                     return pos;
                 } else {
-                    return null;
+                    return new int[] {0,0,0};
                 }
             case 1:
                 if (c < 2 * size - 1 && inBoard(a, r, c + 1)) {
                     int[] pos = {a, r, c + 1};
                     return pos;
                 } else {
-                    return null;
+                    return new int[] {0,0,0};
                 }
             case 2:
                 if (inBoard(1 - a, r + a, c + a) && c + a <= 2 * size - 1 && r + a < size - a) {
                     int[] pos = {1 - a, r + a, c + a};
                     return pos;
                 } else {
-                    return null;
+                    return new int[] {0,0,0};
                 }
             case 3:
                 if (inBoard(1 - a, r + a, c - (1 - a)) && c - (1 - a) >= 0 && r + a < size - a) {
                     int[] pos = {1 - a, r + a, c - (1 - a)};
                     return pos;
                 } else {
-                    return null;
+                    return new int[] {0,0,0};
                 }
             case 4:
                 if (c > 0 && inBoard(a, r, c)) {
                     int[] pos = {a, r, c - 1};
                     return pos;
                 } else {
-                    return null;
+                    return new int[] {0,0,0};
                 }
             case 5:
                 if (inBoard(1 - a, r - (1 - a), c - (1 - a)) && c - (1 - a) >= 0 && r - (1 - a) >= 0) {
                     int[] pos = {1 - a, r - (1 - a), c - (1 - a)};
                     return pos;
                 } else {
-                    return null;
+                    return new int[] {0,0,0};
                 }
 
             default:
-                return null;
+                return new int[] {0,0,0};
         }
     }
 
