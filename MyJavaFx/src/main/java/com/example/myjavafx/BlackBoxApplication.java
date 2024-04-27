@@ -1,7 +1,9 @@
 package com.example.myjavafx;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -79,6 +81,12 @@ public class BlackBoxApplication extends Application {
                         hexagon.setFill(Color.GREEN);
                         hexagon.setOnMouseClicked(e -> {
                             resetGrid();
+                            for (int i = 0; i < 6; i++) {
+                                int[] pos = board.getDirNeighbourPos(loopRow % 2, loopRow / 2, loopCol, i);
+                                if (board.inBoard(pos[0], pos[1], pos[2])) {
+                                    
+                                }
+                            }
                         });
                     }
                     gridPane.add(hexagon, 2 * col + row % 2, row);
@@ -141,5 +149,18 @@ public class BlackBoxApplication extends Application {
     private void resetGrid()
     {
 
+    }
+
+    private Node getHexagon(final int row, final int col, GridPane gp) {
+        Node node = null;
+        ObservableList<Node> children = gp.getChildren();
+
+        for (Node hexagon : children) {
+            if (gp.getRowIndex(hexagon) == row && gp.getColumnIndex(hexagon) == col) {
+                node = hexagon;
+                break;
+            }
+        }
+        return node;
     }
 }

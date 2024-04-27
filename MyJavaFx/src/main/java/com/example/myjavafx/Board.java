@@ -143,7 +143,7 @@ public class Board {
         }
     }
 
-    private int[] getDirNeighbourPos(int a, int r, int c, int dir) {
+    public int[] getDirNeighbourPos(int a, int r, int c, int dir) {
         switch (dir) {
             case 0:
                 if (inBoard(1 - a, r - (1 - a), c + a) && c + a <= 2 * size - 1 && r - (1 - a) >= 0) {
