@@ -197,62 +197,27 @@ public class Board {
         return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], r.getDirection());
     }
 
-    private Cell getRayForwardCell(Ray r) {
-        if (getRayForwardCellPos(r) == null) {
-            return null;
-        } else
-            return board[getRayForwardCellPos(r)[0]][getRayForwardCellPos(r)[1]][getRayForwardCellPos(r)[2]];
-    }
-
     private int[] getRayRightCellPos(Ray r) {
         return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], (r.getDirection() + 1) % 6);
-    }
-
-    private Cell getRayRightCell(Ray r) {
-        if (getRayRightCellPos(r) == null) {
-            return null;
-        } else
-            return board[getRayRightCellPos(r)[0]][getRayRightCellPos(r)[1]][getRayRightCellPos(r)[2]];
     }
 
     private int[] getRayLeftCellPos(Ray r) {
         return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], (r.getDirection() - 1) % 6);
     }
 
-    private Cell getRayLeftCell(Ray r) {
-        if (getRayLeftCellPos(r) == null) {
-            return null;
-        } else
-            return board[getRayLeftCellPos(r)[0]][getRayLeftCellPos(r)[1]][getRayLeftCellPos(r)[2]];
-    }
-
     private int[] getRayBackRightCellPos(Ray r) {
         return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], (r.getDirection() + 2) % 6);
-    }
-
-    private Cell getRayBackRightCell(Ray r) {
-        if (getRayBackRightCellPos(r) == null) {
-            return null;
-        } else
-            return board[getRayBackRightCellPos(r)[0]][getRayBackRightCellPos(r)[1]][getRayBackRightCellPos(r)[2]];
     }
 
     private int[] getRayBackLeftCellPos(Ray r) {
         return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], (r.getDirection() - 2) % 6);
     }
 
-    private Cell getRayBackLeftCell(Ray r) {
-        if (getRayBackLeftCellPos(r) == null) {
-            return null;
-        } else
-            return board[getRayBackLeftCellPos(r)[0]][getRayBackLeftCellPos(r)[1]][getRayBackLeftCellPos(r)[2]];
-    }
-
     public void sendRay(int a, int r, int c, int dir) {
         Ray ray = new Ray(a, r, c, dir);
 
         //check ray absorbed
-        if (getRayForwardCell(ray).hasAtom()) {
+        if (hasAtom(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2])) {
             //return absorbed ray marker
 
             //end of ray
@@ -260,7 +225,10 @@ public class Board {
         } else
 
             //check ray reflected on entry
-            if (getRayBackLeftCell(ray).hasAtom() || getRayBackRightCell(ray).hasAtom() || getRayLeftCell(ray).hasAtom() || getRayRightCell(ray).hasAtom()) {
+            if (hasAtom(getRayBackLeftCellPos(ray)[0], getRayBackLeftCellPos(ray)[1], getRayBackLeftCellPos(ray)[2]) ||
+            hasAtom(getRayBackRightCellPos(ray)[0], getRayBackRightCellPos(ray)[1], getRayBackRightCellPos(ray)[2]) ||
+            hasAtom(getRayLeftCellPos(ray)[0], getRayLeftCellPos(ray)[1], getRayLeftCellPos(ray)[2]) ||
+            hasAtom(getRayRightCellPos(ray)[0], getRayRightCellPos(ray)[1], getRayRightCellPos(ray)[2])) {
                 //return reflected ray marker
 
                 //end of ray
@@ -270,10 +238,10 @@ public class Board {
         //start ray motion
         ray.move(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2]);
 
-        while (getRayForwardCell(ray) != null) {
-            if (getRayLeftCell(ray).hasAtom()) {
+        while (inBoard(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2])) {
+            if (hasAtom(getRayLeftCellPos(ray)[0], getRayLeftCellPos(ray)[1], getRayLeftCellPos(ray)[2])) {
                 //check ray reflected 180deg
-                if (getRayRightCell(ray).hasAtom()) {
+                if (hasAtom(getRayRightCellPos(ray)[0], getRayRightCellPos(ray)[1], getRayRightCellPos(ray)[2])) {
                     //return ray reflected ray marker
 
                     //end of ray
@@ -281,16 +249,16 @@ public class Board {
                 } else
 
                     //check ray deflected 120deg right
-                    if (getRayForwardCell(ray).hasAtom()) {
+                    if (hasAtom(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2])) {
                         ray.rotate(2);
                     } else
 
                         //ray deflected 60deg right
                         ray.rotate(1);
 
-            } else if (getRayRightCell(ray).hasAtom()) {
+            } else if (hasAtom(getRayRightCellPos(ray)[0], getRayRightCellPos(ray)[1], getRayRightCellPos(ray)[2])) {
                 //check ray deflected 120deg left
-                if (getRayForwardCell(ray).hasAtom()) {
+                if (hasAtom(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2])) {
                     ray.rotate(-2);
                 } else
 
@@ -299,7 +267,7 @@ public class Board {
             } else
 
                 //check ray absorbed
-                if (getRayForwardCell(ray).hasAtom()) {
+                if (hasAtom(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2])) {
                     //return absorbed ray marker
 
                     //stop ray
@@ -330,7 +298,7 @@ public class Board {
                 num2 = rand.nextInt(0, size);
                 num3 = rand.nextInt(0, 2 * size - 1);
             }
-            while (board[num1][num2][num3].hasAtom()) {
+            while (hasAtom(num1, num2, num3)) {
                 num1 = rand.nextInt(0, 1);
                 num2 = rand.nextInt(0, size);
                 num3 = rand.nextInt(0, 2 * size - 2);
