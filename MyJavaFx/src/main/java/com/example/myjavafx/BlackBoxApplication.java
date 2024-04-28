@@ -2,11 +2,14 @@ package com.example.myjavafx;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
@@ -85,10 +88,17 @@ public class BlackBoxApplication extends Application {
                                 Integer j = i;
                                 int[] pos = board.getDirNeighbourPos(loopRow % 2, loopRow / 2, loopCol, i);
                                 if (pos != null && board.inBoard(pos[0], pos[1], pos[2]) && getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane) != null) {
+                                    
+                                    Paint prevColour = getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).getFill();
+                                    EventHandler<? super MouseEvent> prevEventHandler = getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).getOnMouseClicked();
+
                                     getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setFill(Color.YELLOW);
                                     getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setOnMouseClicked(f -> {
                                         board.sendRay(loopRow % 2, loopRow / 2, loopCol, j);
                                         System.out.println("sent ray from " + loopRow % 2 + "," + loopRow / 2 + "," + loopCol + " in direction " + j);
+
+                                        getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setFill(prevColour);
+                                        getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setOnMouseClicked(prevEventHandler);
                                     });
                                 }
                             }
