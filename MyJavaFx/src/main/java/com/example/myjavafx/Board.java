@@ -42,7 +42,7 @@ public class Board {
 
     //inBoard checks to see if a specific co-ordinate is within the boards boundaries
     public boolean inBoard(int a, int r, int c) {
-        if (a >= 0 && a <= 1 && r >= 0 && r <= size - a && c >= 0 && c < 2 * size && board[a][r][c] != null) {
+        if (a >= 0 && a <= 1 && r >= 0 && r <= size - a && c >= 0 && c < 2 * size - 1 && board[a][r][c] != null) {
             return true;
         } else return false;
     }
