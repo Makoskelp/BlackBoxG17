@@ -170,7 +170,7 @@ public class Board {
                 drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
                 //end of ray
                 return;
-            }
+        }
 
         //start ray motion
         drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
@@ -245,24 +245,41 @@ public class Board {
 
     private void drawRay(int a, int r, int c, int direction, Pane overlayPane, GridPane gridPane)
     {
-        Polygon hexagon = BlackBoxApplication.getHexagon(r * 2 + a, 2 * c + a, gridPane);
-        //hexagon.setFill(Color.ORANGE); to test if correct hexagon selected
+        Polygon startHexagon = BlackBoxApplication.getHexagon(r * 2 + a, 2 * c + a, gridPane);//get target hexagon
 
-        double startX = hexagon.getBoundsInParent().getCenterX();
-        double startY = hexagon.getBoundsInParent().getCenterY();
-        if (BlackBoxApplication.getHexagon(2*getDirNeighbourPos(a, r, c, direction)[1] + getDirNeighbourPos(a, r, c, direction)[0],
-        2*getDirNeighbourPos(a, r, c, direction)[2] + getDirNeighbourPos(a, r, c, direction)[0], gridPane) != null) {
-            Polygon nextHexagon = BlackBoxApplication.getHexagon(2*getDirNeighbourPos(a, r, c, direction)[1] + getDirNeighbourPos(a, r, c, direction)[0],
-            2*getDirNeighbourPos(a, r, c, direction)[2] + getDirNeighbourPos(a, r, c, direction)[0], gridPane);
-            double endX = nextHexagon.getBoundsInParent().getCenterX();
-            double endY = nextHexagon.getBoundsInParent().getCenterY();
+        double centerX = startHexagon.getBoundsInParent().getCenterX();//get center x coordinate
+        double centerY = startHexagon.getBoundsInParent().getCenterY();//get center y coordinate
+        double length  = BlackBoxApplication.getHexagon(1 * 2 + 1, 2 * (1+1) + 1, gridPane).getBoundsInParent().getCenterX() - BlackBoxApplication.getHexagon(1 * 2 + 1, 2 * 1 + 1, gridPane).getBoundsInParent().getCenterX();//test to find length between hexagon centers
 
-
-            Line line = new Line(startX, startY, endX, endY);
-            line.setStroke(Color.PINK); // Set the color of the line
-            overlayPane.getChildren().add(line);
+        Line line;
+        switch (direction)
+        {
+            case 0: //up right
+                line = new Line(centerX, centerY, centerX + length * Math.cos(Math.PI / 3), centerY - length * Math.sin(Math.PI / 3));
+                break;
+            case 1: //right
+                line = new Line(centerX, centerY, centerX + length, centerY);
+                break;
+            case 2: //down right
+                line = new Line(centerX, centerY, centerX + length * Math.cos(Math.PI / 3), centerY + length * Math.sin(Math.PI / 3));
+                break;
+            case 3: //down left
+                line = new Line(centerX, centerY, centerX - length * Math.cos(Math.PI / 3), centerY + length * Math.sin(Math.PI / 3));
+                break;
+            case 4: //left
+                line = new Line(centerX, centerY, centerX - length, centerY);
+                break;
+            case 5: //up left
+                line = new Line(centerX, centerY, centerX - length * Math.cos(Math.PI / 3), centerY - length * Math.sin(Math.PI / 3));
+                break;
+            default:
+                throw new IllegalArgumentException("Direction Invalid");
         }
-    }   
+
+        line.setStroke(Color.RED);
+        line.setStrokeWidth(3);
+        overlayPane.getChildren().add(line);
+    }
 
 
 }
