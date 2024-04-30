@@ -1,10 +1,8 @@
 package com.example.myjavafx;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -17,7 +15,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
-import javafx.scene.shape.Line;
 
 public class BlackBoxApplication extends Application {
 
