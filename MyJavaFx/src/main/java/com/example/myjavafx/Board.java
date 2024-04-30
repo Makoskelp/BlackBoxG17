@@ -2,6 +2,12 @@ package com.example.myjavafx;
 
 import java.util.Random;
 
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
+
 //Board represents the board as an object
 public class Board {
 
@@ -141,13 +147,15 @@ public class Board {
         return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], (r.getDirection() - 2) % 6);
     }
 
-    public void sendRay(int a, int r, int c, int dir) {
+    public void sendRay(int a, int r, int c, int dir, Pane overlayPane, GridPane gridPane) {
         Ray ray = new Ray(a, r, c, dir);
+        BlackBoxApplication.clearBoard(this, gridPane, overlayPane);
 
         //check ray absorbed
         if (hasAtom(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2])) {
             //return absorbed ray marker
 
+            drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
             //end of ray
             return;
         } else
@@ -159,11 +167,13 @@ public class Board {
             hasAtom(getRayRightCellPos(ray)[0], getRayRightCellPos(ray)[1], getRayRightCellPos(ray)[2])) {
                 //return reflected ray marker
 
+                drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
                 //end of ray
                 return;
             }
 
         //start ray motion
+        drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
         ray.move(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2]);
 
         while (inBoard(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2])) {
@@ -172,6 +182,7 @@ public class Board {
                 if (hasAtom(getRayRightCellPos(ray)[0], getRayRightCellPos(ray)[1], getRayRightCellPos(ray)[2])) {
                     //return ray reflected ray marker
 
+                    drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
                     //end of ray
                     return;
                 } else
@@ -198,11 +209,13 @@ public class Board {
                 if (hasAtom(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2])) {
                     //return absorbed ray marker
 
+                    drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
                     //stop ray
                     return;
                 }
 
             //move ray
+            drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
             ray.move(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2]);
         }
         //return regular ray marker
@@ -221,19 +234,35 @@ public class Board {
             int num2 = rand.nextInt(0, size);
             int num3 = rand.nextInt(0, 2 * size - 1);
 
-            while (!inBoard(num1, num2, num3)) {
+            while (!inBoard(num1, num2, num3) || hasAtom(num1, num2, num3)) {
                 num1 = rand.nextInt(0, 1);
                 num2 = rand.nextInt(0, size);
                 num3 = rand.nextInt(0, 2 * size - 1);
             }
-            while (hasAtom(num1, num2, num3)) {
-                num1 = rand.nextInt(0, 1);
-                num2 = rand.nextInt(0, size);
-                num3 = rand.nextInt(0, 2 * size - 2);
-            }
             board[num1][num2][num3].setAtom(true);
         }
     }
+
+    private void drawRay(int a, int r, int c, int direction, Pane overlayPane, GridPane gridPane)
+    {
+        Polygon hexagon = BlackBoxApplication.getHexagon(r * 2 + a, 2 * c + a, gridPane);
+        //hexagon.setFill(Color.ORANGE); to test if correct hexagon selected
+
+        double startX = hexagon.getBoundsInParent().getCenterX();
+        double startY = hexagon.getBoundsInParent().getCenterY();
+        if (BlackBoxApplication.getHexagon(2*getDirNeighbourPos(a, r, c, direction)[1] + getDirNeighbourPos(a, r, c, direction)[0],
+        2*getDirNeighbourPos(a, r, c, direction)[2] + getDirNeighbourPos(a, r, c, direction)[0], gridPane) != null) {
+            Polygon nextHexagon = BlackBoxApplication.getHexagon(2*getDirNeighbourPos(a, r, c, direction)[1] + getDirNeighbourPos(a, r, c, direction)[0],
+            2*getDirNeighbourPos(a, r, c, direction)[2] + getDirNeighbourPos(a, r, c, direction)[0], gridPane);
+            double endX = nextHexagon.getBoundsInParent().getCenterX();
+            double endY = nextHexagon.getBoundsInParent().getCenterY();
+
+
+            Line line = new Line(startX, startY, endX, endY);
+            line.setStroke(Color.PINK); // Set the color of the line
+            overlayPane.getChildren().add(line);
+        }
+    }   
 
 
 }

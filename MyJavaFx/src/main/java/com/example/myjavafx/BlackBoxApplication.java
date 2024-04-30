@@ -85,7 +85,7 @@ public class BlackBoxApplication extends Application {
                     {
                         hexagon.setFill(Color.GREEN);
                         hexagon.setOnMouseClicked(e -> {
-                            clearBoard(board, gridPane);
+                            clearBoard(board, gridPane, overlayPane);
                             for (int i = 0; i < 6; i++) {
                                 Integer j = i;
                                 int[] pos = board.getDirNeighbourPos(loopRow % 2, loopRow / 2, loopCol, i);
@@ -96,7 +96,7 @@ public class BlackBoxApplication extends Application {
                                 
                                     getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setFill(Color.YELLOW);
                                     getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setOnMouseClicked(f -> {
-                                        board.sendRay(loopRow % 2, loopRow / 2, loopCol, j);
+                                        board.sendRay(loopRow % 2, loopRow / 2, loopCol, j, overlayPane, gridPane);
                                         System.out.println("sent ray from " + loopRow % 2 + "," + loopRow / 2 + "," + loopCol + " in direction " + j);
                                     
                                         getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setFill(prevColour);
@@ -127,7 +127,7 @@ public class BlackBoxApplication extends Application {
         //Sets the vertical gaps between the cells
         gridPane.setVgap(-0.21 * HEXAGON_SIZE - 2.5);
 
-        drawRay(1,1,1,overlayPane,gridPane);
+        //drawRay(1,1,1,overlayPane,gridPane);
 
         newStage.setScene(scene);
 
@@ -171,7 +171,7 @@ public class BlackBoxApplication extends Application {
         return hexagon;
     }
 
-    private Polygon getHexagon(final int row, final int col, GridPane gp) {
+    public static Polygon getHexagon(final int row, final int col, GridPane gp) {
         Polygon node = null;
         ObservableList<Node> children = gp.getChildren();
 
@@ -184,7 +184,7 @@ public class BlackBoxApplication extends Application {
         return node;
     }
 
-    private void clearBoard(Board board, GridPane gridPane)
+    public static void clearBoard(Board board, GridPane gridPane, Pane overlayPane)
     {
         int numRows = 2 * board.getSize();
         int numCols = 4 * board.getSize() - 2;
@@ -202,18 +202,6 @@ public class BlackBoxApplication extends Application {
                 }
             }
         }
+        overlayPane.getChildren().clear();
     }
-
-    private void drawRay(int a, int r, int c, Pane overlayPane, GridPane gridPane)
-    {
-        Polygon hexagon = getHexagon(r * 2 + a, 2 * c + a, gridPane);
-        hexagon.setFill(Color.ORANGE);// to test if correct hexagon selected
-
-        double centerX = hexagon.getBoundsInParent().getCenterX();
-        double centerY = hexagon.getBoundsInParent().getCenterY();
-
-        Line line = new Line(centerX, centerY, centerX+100, centerY);
-        line.setStroke(Color.BLUE); // Set the color of the line
-        overlayPane.getChildren().add(line);
-    }   
 }
