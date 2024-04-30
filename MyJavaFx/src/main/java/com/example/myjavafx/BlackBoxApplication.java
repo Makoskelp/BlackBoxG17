@@ -127,12 +127,13 @@ public class BlackBoxApplication extends Application {
         //Sets the vertical gaps between the cells
         gridPane.setVgap(-0.21 * HEXAGON_SIZE - 2.5);
 
-        drawRay(1,1,1,overlayPane,gridPane);
-
         newStage.setScene(scene);
 
         //Displays the board
+
         newStage.show();
+
+        drawRay(0,0,2,2,overlayPane,gridPane);
     }
 
     //createHexagon creates the hexagon items to be displayed within the board
@@ -204,16 +205,41 @@ public class BlackBoxApplication extends Application {
         }
     }
 
-    private void drawRay(int a, int r, int c, Pane overlayPane, GridPane gridPane)
+    private void drawRay(int a, int r, int c, int direction, Pane overlayPane, GridPane gridPane)
     {
-        Polygon hexagon = getHexagon(r * 2 + a, 2 * c + a, gridPane);
-        hexagon.setFill(Color.ORANGE);// to test if correct hexagon selected
+        Polygon startHexagon = getHexagon(r * 2 + a, 2 * c + a, gridPane);//get target hexagon
 
-        double centerX = hexagon.getBoundsInParent().getCenterX();
-        double centerY = hexagon.getBoundsInParent().getCenterY();
+        double centerX = startHexagon.getBoundsInParent().getCenterX();//get center x coordinate
+        double centerY = startHexagon.getBoundsInParent().getCenterY();//get center y coordinate
+        double length  = getHexagon(1 * 2 + 1, 2 * (1+1) + 1, gridPane).getBoundsInParent().getCenterX() - getHexagon(1 * 2 + 1, 2 * 1 + 1, gridPane).getBoundsInParent().getCenterX();//test to find length between hexagon centers
 
-        Line line = new Line(centerX, centerY, centerX+100, centerY);
-        line.setStroke(Color.BLUE); // Set the color of the line
+        Line line;
+        switch (direction)
+        {
+            case 0: //up right
+                line = new Line(centerX, centerY, centerX + length * Math.cos(Math.PI / 3), centerY - length * Math.sin(Math.PI / 3));
+                break;
+            case 1: //right
+                line = new Line(centerX, centerY, centerX + length, centerY);
+                break;
+            case 2: //down right
+                line = new Line(centerX, centerY, centerX + length * Math.cos(Math.PI / 3), centerY + length * Math.sin(Math.PI / 3));
+                break;
+            case 3: //down
+                line = new Line(centerX, centerY, centerX, centerY + length);
+                break;
+            case 4: //down left
+                line = new Line(centerX, centerY, centerX - length * Math.cos(Math.PI / 3), centerY + length * Math.sin(Math.PI / 3));
+                break;
+            case 5: //up left
+                line = new Line(centerX, centerY, centerX - length * Math.cos(Math.PI / 3), centerY - length * Math.sin(Math.PI / 3));
+                break;
+            default:
+                throw new IllegalArgumentException("Direction Invalid");
+        }
+
+        line.setStroke(Color.RED);
+        line.setStrokeWidth(3);
         overlayPane.getChildren().add(line);
-    }   
+    }
 }
