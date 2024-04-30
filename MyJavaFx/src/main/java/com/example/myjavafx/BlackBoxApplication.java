@@ -1,18 +1,23 @@
 package com.example.myjavafx;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
+import javafx.scene.shape.Line;
 
 public class BlackBoxApplication extends Application {
 
@@ -36,6 +41,10 @@ public class BlackBoxApplication extends Application {
         //Creates a gridPane which is used to format the hexagons in our board
         GridPane gridPane = new GridPane();
         Scene scene = new Scene(gridPane);
+
+        Pane overlayPane = new Pane();
+        overlayPane.setMouseTransparent(true); // Make the overlay pane transparent to mouse events
+        scene.setRoot(new StackPane(gridPane, overlayPane)); // Add both gridPane and overlayPane to the scene
 
         //Sets the background colour of the gridPane
         gridPane.setStyle("-fx-background-color: black;");
@@ -71,13 +80,6 @@ public class BlackBoxApplication extends Application {
                     //cast ints to Integers so they can be used in lambda function for mouse click
                     Integer loopRow = row, loopCol = col;
 
-                    if (board.isBorder(row % 2, row / 2, col)) hexagon.setFill(Color.GREEN);
-
-                    if (board.hasAtom(loopRow % 2, loopRow / 2, loopCol))
-                    {
-                        hexagon.setFill(Color.RED);
-                    }
-
                     //hexagon clicked event
                     if (board.isBorder(row % 2, row / 2, col))
                     {
@@ -91,12 +93,12 @@ public class BlackBoxApplication extends Application {
                                     
                                     Paint prevColour = getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).getFill();
                                     EventHandler<? super MouseEvent> prevEventHandler = getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).getOnMouseClicked();
-
+                                
                                     getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setFill(Color.YELLOW);
                                     getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setOnMouseClicked(f -> {
                                         board.sendRay(loopRow % 2, loopRow / 2, loopCol, j);
                                         System.out.println("sent ray from " + loopRow % 2 + "," + loopRow / 2 + "," + loopCol + " in direction " + j);
-
+                                    
                                         getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setFill(prevColour);
                                         getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setOnMouseClicked(prevEventHandler);
                                     });
@@ -104,13 +106,19 @@ public class BlackBoxApplication extends Application {
                             }
                         });
                     }
+
+                    if (board.hasAtom(loopRow % 2, loopRow / 2, loopCol))
+                    {
+                        hexagon.setFill(Color.RED);
+                    }
+
                     gridPane.add(hexagon, 2 * col + row % 2, row);
                 }
             }
         }
 
         // Set padding for the GridPane
-        gridPane.setPadding(new Insets(50, 50, 50, 50));
+        gridPane.setPadding(new Insets(50, 75, 50, 50));
 
         //The next 2 lines of code help us format the cells in a board display
         //Sets the horizontal gaps between the cells
@@ -118,6 +126,8 @@ public class BlackBoxApplication extends Application {
 
         //Sets the vertical gaps between the cells
         gridPane.setVgap(-0.21 * HEXAGON_SIZE - 2.5);
+
+        drawRay(1,1,1,overlayPane,gridPane);
 
         newStage.setScene(scene);
 
@@ -193,4 +203,17 @@ public class BlackBoxApplication extends Application {
             }
         }
     }
+
+    private void drawRay(int a, int r, int c, Pane overlayPane, GridPane gridPane)
+    {
+        Polygon hexagon = getHexagon(r * 2 + a, 2 * c + a, gridPane);
+        hexagon.setFill(Color.ORANGE);// to test if correct hexagon selected
+
+        double centerX = hexagon.getBoundsInParent().getCenterX();
+        double centerY = hexagon.getBoundsInParent().getCenterY();
+
+        Line line = new Line(centerX, centerY, centerX+100, centerY);
+        line.setStroke(Color.BLUE); // Set the color of the line
+        overlayPane.getChildren().add(line);
+    }   
 }
