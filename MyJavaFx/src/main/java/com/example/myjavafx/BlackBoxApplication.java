@@ -191,10 +191,10 @@ public class BlackBoxApplication extends Application {
         {
             for (int col = 0; col < numCols / 2; col++)
             {
-                // Get the hexagon for the current row and column
+                //Get the hexagon for the current row and column
                 Polygon hexagon = getHexagon((row / 2)*2+(row % 2), 2*col+(row % 2), gridPane);
     
-                // Check if hexagon is not null before setting its fill color
+                //Check if hexagon is not null before setting its fill color
                 if (hexagon != null) {
                     hexagon.setFill(Color.BLACK);
                 }

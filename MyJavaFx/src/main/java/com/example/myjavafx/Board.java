@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.StrokeLineCap;
 
 //Board represents the board as an object
 public class Board {
@@ -278,9 +279,8 @@ public class Board {
         }
 
         line.setStroke(Color.RED);
-        line.setStrokeWidth(3);
+        line.setStrokeWidth(5);
+        line.setStrokeLineCap(StrokeLineCap.ROUND);
         overlayPane.getChildren().add(line);
     }
-
-
 }
