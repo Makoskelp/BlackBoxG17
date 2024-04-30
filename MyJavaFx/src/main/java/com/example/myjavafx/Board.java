@@ -2,6 +2,12 @@ package com.example.myjavafx;
 
 import java.util.Random;
 
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
+
 //Board represents the board as an object
 public class Board {
 
@@ -141,13 +147,15 @@ public class Board {
         return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], (r.getDirection() - 2) % 6);
     }
 
-    public void sendRay(int a, int r, int c, int dir) {
+    public void sendRay(int a, int r, int c, int dir, Pane overlayPane, GridPane gridPane) {
         Ray ray = new Ray(a, r, c, dir);
+        BlackBoxApplication.clearBoard(this, gridPane, overlayPane);
 
         //check ray absorbed
         if (hasAtom(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2])) {
             //return absorbed ray marker
 
+            drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
             //end of ray
             return;
         } else
@@ -159,11 +167,13 @@ public class Board {
             hasAtom(getRayRightCellPos(ray)[0], getRayRightCellPos(ray)[1], getRayRightCellPos(ray)[2])) {
                 //return reflected ray marker
 
+                drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
                 //end of ray
                 return;
-            }
+        }
 
         //start ray motion
+        drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
         ray.move(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2]);
 
         while (inBoard(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2])) {
@@ -172,6 +182,7 @@ public class Board {
                 if (hasAtom(getRayRightCellPos(ray)[0], getRayRightCellPos(ray)[1], getRayRightCellPos(ray)[2])) {
                     //return ray reflected ray marker
 
+                    drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
                     //end of ray
                     return;
                 } else
@@ -198,15 +209,18 @@ public class Board {
                 if (hasAtom(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2])) {
                     //return absorbed ray marker
 
+                    drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
                     //stop ray
                     return;
                 }
 
             //move ray
+            drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
             ray.move(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2]);
         }
         //return regular ray marker
 
+        drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
         //end of ray
         return;
     }
@@ -221,18 +235,51 @@ public class Board {
             int num2 = rand.nextInt(0, size);
             int num3 = rand.nextInt(0, 2 * size - 1);
 
-            while (!inBoard(num1, num2, num3)) {
+            while (!inBoard(num1, num2, num3) || hasAtom(num1, num2, num3)) {
                 num1 = rand.nextInt(0, 1);
                 num2 = rand.nextInt(0, size);
                 num3 = rand.nextInt(0, 2 * size - 1);
             }
-            while (hasAtom(num1, num2, num3)) {
-                num1 = rand.nextInt(0, 1);
-                num2 = rand.nextInt(0, size);
-                num3 = rand.nextInt(0, 2 * size - 2);
-            }
             board[num1][num2][num3].setAtom(true);
         }
+    }
+
+    private void drawRay(int a, int r, int c, int direction, Pane overlayPane, GridPane gridPane)
+    {
+        Polygon startHexagon = BlackBoxApplication.getHexagon(r * 2 + a, 2 * c + a, gridPane);//get target hexagon
+
+        double centerX = startHexagon.getBoundsInParent().getCenterX();//get center x coordinate
+        double centerY = startHexagon.getBoundsInParent().getCenterY();//get center y coordinate
+        double length  = BlackBoxApplication.getHexagon(1 * 2 + 1, 2 * (1+1) + 1, gridPane).getBoundsInParent().getCenterX() - BlackBoxApplication.getHexagon(1 * 2 + 1, 2 * 1 + 1, gridPane).getBoundsInParent().getCenterX();//test to find length between hexagon centers
+
+        Line line;
+        switch (direction)
+        {
+            case 0: //up right
+                line = new Line(centerX, centerY, centerX + length * Math.cos(Math.PI / 3), centerY - length * Math.sin(Math.PI / 3));
+                break;
+            case 1: //right
+                line = new Line(centerX, centerY, centerX + length, centerY);
+                break;
+            case 2: //down right
+                line = new Line(centerX, centerY, centerX + length * Math.cos(Math.PI / 3), centerY + length * Math.sin(Math.PI / 3));
+                break;
+            case 3: //down left
+                line = new Line(centerX, centerY, centerX - length * Math.cos(Math.PI / 3), centerY + length * Math.sin(Math.PI / 3));
+                break;
+            case 4: //left
+                line = new Line(centerX, centerY, centerX - length, centerY);
+                break;
+            case 5: //up left
+                line = new Line(centerX, centerY, centerX - length * Math.cos(Math.PI / 3), centerY - length * Math.sin(Math.PI / 3));
+                break;
+            default:
+                throw new IllegalArgumentException("Direction Invalid");
+        }
+
+        line.setStroke(Color.RED);
+        line.setStrokeWidth(3);
+        overlayPane.getChildren().add(line);
     }
 
 
