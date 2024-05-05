@@ -3,6 +3,7 @@ package com.example.myjavafx;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -16,11 +17,19 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class BlackBoxApplication extends Application {
 
     //Sets the default size of each hexagon
     private static final double HEXAGON_SIZE = 50;
-    private final int size; // Size variable
+    private final int size;// Size variable
+
+    //Amount of rays entered by the user
+    private int raysEntered = 0;
+
+    //Maximum number of rays allowed at this size of the board
+    private int maxNumOfRays = 1;
 
     public BlackBoxApplication(int size) {
         this.size = size;
@@ -78,34 +87,47 @@ public class BlackBoxApplication extends Application {
                     Integer loopRow = row, loopCol = col;
 
                     //hexagon clicked event
-                    if (board.isBorder(row % 2, row / 2, col))
-                    {
+                    if (board.isBorder(row % 2, row / 2, col)) {
                         hexagon.setFill(Color.GREEN);
                         hexagon.setOnMouseClicked(e -> {
                             clearBoard(board, gridPane, overlayPane);
                             for (int i = 0; i < 6; i++) {
                                 Integer j = i;
                                 int[] pos = board.getDirNeighbourPos(loopRow % 2, loopRow / 2, loopCol, i);
-                                if (pos != null && board.inBoard(pos[0], pos[1], pos[2]) && getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane) != null) {
-                                    
-                                    Paint prevColour = getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).getFill();
-                                    EventHandler<? super MouseEvent> prevEventHandler = getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).getOnMouseClicked();
-                                
-                                    getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setFill(Color.YELLOW);
-                                    getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setOnMouseClicked(f -> {
+                                if (pos != null && board.inBoard(pos[0], pos[1], pos[2]) && getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane) != null) {
+
+                                    Paint prevColour = getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).getFill();
+                                    EventHandler<? super MouseEvent> prevEventHandler = getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).getOnMouseClicked();
+
+                                    getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).setFill(Color.YELLOW);
+                                    getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).setOnMouseClicked(f -> {
                                         board.sendRay(loopRow % 2, loopRow / 2, loopCol, j, overlayPane, gridPane);
                                         System.out.println("sent ray from " + loopRow % 2 + "," + loopRow / 2 + "," + loopCol + " in direction " + j);
-                                    
-                                        getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setFill(prevColour);
-                                        getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setOnMouseClicked(prevEventHandler);
+
+                                        //increment the amount of rays entered by the user
+                                        raysEntered++;
+
+                                        getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).setFill(prevColour);
+                                        getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).setOnMouseClicked(prevEventHandler);
+
+                                        //Function checks that the user still has more rays to enter
+                                        //If not then we display the final score board
+                                        if (rayLimitMet(newStage)) {
+                                            try {
+                                                System.out.println("Testing *****************************************************");
+                                                //displayScoreBoard(newStage, overlayPane);
+                                                //testDisplay(newStage);
+                                            } catch (Exception ex) {
+                                                throw new RuntimeException(ex);
+                                            }
+                                        }
                                     });
                                 }
                             }
                         });
                     }
 
-                    if (board.hasAtom(loopRow % 2, loopRow / 2, loopCol))
-                    {
+                    if (board.hasAtom(loopRow % 2, loopRow / 2, loopCol)) {
                         hexagon.setFill(Color.RED);
                     }
 
@@ -179,18 +201,15 @@ public class BlackBoxApplication extends Application {
         return node;
     }
 
-    public static void clearBoard(Board board, GridPane gridPane, Pane overlayPane)
-    {
+    public static void clearBoard(Board board, GridPane gridPane, Pane overlayPane) {
         int numRows = 2 * board.getSize();
         int numCols = 4 * board.getSize() - 2;
-    
-        for (int row = 0; row < numRows; row++)
-        {
-            for (int col = 0; col < numCols / 2; col++)
-            {
+
+        for (int row = 0; row < numRows; row++) {
+            for (int col = 0; col < numCols / 2; col++) {
                 //Get the hexagon for the current row and column
-                Polygon hexagon = getHexagon((row / 2)*2+(row % 2), 2*col+(row % 2), gridPane);
-    
+                Polygon hexagon = getHexagon((row / 2) * 2 + (row % 2), 2 * col + (row % 2), gridPane);
+
                 //Check if hexagon is not null before setting its fill color
                 if (hexagon != null) {
                     hexagon.setFill(Color.BLACK);
@@ -199,4 +218,57 @@ public class BlackBoxApplication extends Application {
         }
         overlayPane.getChildren().clear();
     }
+
+    public boolean rayLimitMet(Stage mainStage) {
+        //If the user has entered all the rays he is allowed
+        if (raysEntered >= maxNumOfRays) {
+            return true;
+        } else return false;
+    }
+
+
+    public void displayScoreBoard(Stage mainStage, Pane overlayPane) {
+
+        Scene scoreBoardScene = tempdisplayScoreBoard(mainStage, overlayPane);
+        //ScoreBoardController scoreBoardController = new ScoreBoardController();
+        //Scene scoreBoardScene = scoreBoardController.createScene(mainStage);
+
+        mainStage.setScene(scoreBoardScene);
+    }
+
+    private Scene tempdisplayScoreBoard(Stage mainStage, Pane overlayPane) {
+
+        // Load the FXML file
+        Pane root = new Pane();
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("scoreBoardDisplay.fxml"));
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle any exceptions related to loading the FXML file
+        }
+        //Pane scorePane = (Pane) scoreRoot;
+        root.setStyle("-fx-background-color: Black;");
+
+        // Create a new Scene using the root node
+        Scene scoreBoardScene = new Scene(root, 848, 631);
+
+        // Set the title of the stage
+        mainStage.setTitle("BlackBox+.ScoreBoard");
+
+        return scoreBoardScene;
+    }
+
+    public void testDisplay(Stage mainStage){
+        mainStage.close();
+
+        ScoreBoardController newBoard= new ScoreBoardController();
+        try {
+            newBoard.start(new Stage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

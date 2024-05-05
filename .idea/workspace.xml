@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb9f061f-dc5f-467b-82cc-f759beb30820" name="Changes" comment="" />
+    <list default="true" id="bb9f061f-dc5f-467b-82cc-f759beb30820" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/scoreBoardDisplay.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/BlackBoxApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/BlackBoxApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/menu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/menuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/menuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/BlackBoxApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/BlackBoxApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Launcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Launcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Ray.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Ray.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/menuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/menuController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/module-info.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,11 +28,27 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;KevinDunne2003&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Makoskelp/BlackBoxG17.git&quot;,
+    &quot;accountId&quot;: &quot;5982def3-45f0-4fdc-bf73-6ef897c8e352&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -38,7 +68,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Year2/Semester 2/Software Project/BlackBoxG17",
+    "last_opened_file_path": "C:/Year2/Semester 2/Software Project/BlackBoxG17/MyJavaFx/src/main/java/com/example/myjavafx",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -51,10 +81,34 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Year2\Semester 2\Software Project\BlackBoxG17\MyJavaFx\src\main\java\com\example\myjavafx" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.myjavafx" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="BlackBoxG17" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="BlackBoxG17" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
       </set>
     </attachedChunks>
   </component>
@@ -70,11 +124,25 @@
       <workItem from="1713554901535" duration="9733000" />
       <workItem from="1713626737868" duration="30000" />
       <workItem from="1713728354350" duration="667000" />
+      <workItem from="1714914265589" duration="7248000" />
+      <workItem from="1714938066939" duration="4358000" />
+      <workItem from="1714942498462" duration="4453000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -84,6 +152,15 @@
           <line>16</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/BlackBoxApplication.java</url>
+          <line>171</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.RuntimeException" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
