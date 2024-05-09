@@ -26,10 +26,10 @@ public class BlackBoxApplication extends Application {
     private final int size;// Size variable
 
     //Amount of rays entered by the user
-    private int raysEntered = 0;
+    public int raysEntered = 0;
 
     //Maximum number of rays allowed at this size of the board
-    private int maxNumOfRays = 1;
+    public int maxNumOfRays = 1;
 
     public BlackBoxApplication(int size) {
         this.size = size;
@@ -112,13 +112,13 @@ public class BlackBoxApplication extends Application {
 
                                         //Function checks that the user still has more rays to enter
                                         //If not then we display the final score board
-                                        if (rayLimitMet(newStage)) {
+                                        if (rayLimitMet()) {
                                             try {
                                                 System.out.println("Testing *****************************************************");
-                                                //displayScoreBoard(newStage, overlayPane);
+                                                displayScoreBoard(newStage);
                                                 //testDisplay(newStage);
                                             } catch (Exception ex) {
-                                                throw new RuntimeException(ex);
+                                                //throw new RuntimeException(ex);
                                             }
                                         }
                                     });
@@ -154,7 +154,7 @@ public class BlackBoxApplication extends Application {
 
     //createHexagon creates the hexagon items to be displayed within the board
     //It is passed an x co-ordinate, a y co-ordinate and the radius or size of the hexagon
-    private Polygon createHexagon(double x, double y, double radius) {
+    public Polygon createHexagon(double x, double y, double radius) {
         //The hexagon is made using polygon objects
         Polygon hexagon = new Polygon();
         //We pivot or rotate the object so that it represents the hexagons with the point facing up
@@ -219,28 +219,32 @@ public class BlackBoxApplication extends Application {
         overlayPane.getChildren().clear();
     }
 
-    public boolean rayLimitMet(Stage mainStage) {
-        //If the user has entered all the rays he is allowed
+    public boolean rayLimitMet() {
+        //Checks if all the users rays have been entered
+
         if (raysEntered >= maxNumOfRays) {
+            //Returns true if all the rays have been entered
             return true;
-        } else return false;
+        }
+        //Returns false if there are still more rays to enter
+        else return false;
+
     }
 
 
-    public void displayScoreBoard(Stage mainStage, Pane overlayPane) {
+    public void displayScoreBoard(Stage mainStage) {
 
-        Scene scoreBoardScene = tempdisplayScoreBoard(mainStage, overlayPane);
-        //ScoreBoardController scoreBoardController = new ScoreBoardController();
-        //Scene scoreBoardScene = scoreBoardController.createScene(mainStage);
+        Scene scoreBoardScene = tempdisplayScoreBoard(mainStage);
 
+        //Display the ScoreBoard
         mainStage.setScene(scoreBoardScene);
     }
 
-    private Scene tempdisplayScoreBoard(Stage mainStage, Pane overlayPane) {
+    private Scene tempdisplayScoreBoard(Stage mainStage) {
 
-        // Load the FXML file
         Pane root = new Pane();
 
+        // Load the FXML file
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("scoreBoardDisplay.fxml"));
             root = fxmlLoader.load();
@@ -248,6 +252,7 @@ public class BlackBoxApplication extends Application {
             e.printStackTrace();
             // Handle any exceptions related to loading the FXML file
         }
+
         //Pane scorePane = (Pane) scoreRoot;
         root.setStyle("-fx-background-color: Black;");
 

@@ -5,19 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb9f061f-dc5f-467b-82cc-f759beb30820" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/scoreBoardDisplay.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/BlackBoxApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/BlackBoxApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/menu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/menuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/menuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/scoreBoardDisplay.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/scoreBoardDisplay.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/BlackBoxApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/BlackBoxApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Cell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Launcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Launcher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Ray.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/Ray.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/menuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/menuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -60,15 +54,17 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.BlackBoxApplication.executor": "Run",
+    "Application.BlackBoxApplication.executor": "Debug",
     "Application.Launcher.executor": "Run",
     "Application.menuController.executor": "Run",
+    "JUnit.BlackBoxApplicationTest.executor": "Run",
+    "JUnit.BlackBoxApplicationTest.testCreateHexagonRotation.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Year2/Semester 2/Software Project/BlackBoxG17/MyJavaFx/src/main/java/com/example/myjavafx",
+    "last_opened_file_path": "C:/Year2/Semester 2/Software Project/BlackBoxG17",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -89,7 +85,51 @@
       <recent name="com.example.myjavafx" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Launcher">
+    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.myjavafx.Launcher" />
+      <module name="MyJavaFx" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.myjavafx.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BlackBoxApplicationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MyJavaFx" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.myjavafx.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.myjavafx" />
+      <option name="MAIN_CLASS_NAME" value="com.example.myjavafx.BlackBoxApplicationTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BlackBoxApplicationTest.testCreateHexagonRotation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MyJavaFx" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.myjavafx.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.myjavafx" />
+      <option name="MAIN_CLASS_NAME" value="com.example.myjavafx.BlackBoxApplicationTest" />
+      <option name="METHOD_NAME" value="testCreateHexagonRotation" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="BlackBoxG17" />
       <method v="2">
@@ -103,6 +143,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Launcher" />
+        <item itemvalue="JUnit.BlackBoxApplicationTest" />
+        <item itemvalue="JUnit.BlackBoxApplicationTest.testCreateHexagonRotation" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -127,6 +174,9 @@
       <workItem from="1714914265589" duration="7248000" />
       <workItem from="1714938066939" duration="4358000" />
       <workItem from="1714942498462" duration="4453000" />
+      <workItem from="1715163652811" duration="3887000" />
+      <workItem from="1715167997573" duration="1409000" />
+      <workItem from="1715255086313" duration="5347000" />
     </task>
     <servers />
   </component>
