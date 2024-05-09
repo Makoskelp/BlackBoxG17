@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb9f061f-dc5f-467b-82cc-f759beb30820" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/BlackBoxApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/BlackBoxApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/Launcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/scoreBoardDisplay.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/com/example/myjavafx/scoreBoardDisplay.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/BlackBoxApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/com/example/myjavafx/BlackBoxApplication.class" afterDir="false" />
+    <list default="true" id="bb9f061f-dc5f-467b-82cc-f759beb30820" name="Changes" comment="scoreBoardDisplay.fxml will not display&#10;tempdisplayScoreBoard in BlackBoxApplication is being used to display this. If the .fxml file is replaced with menu.fxml it works. I have checked scoreBoardDisplay.fxml in a dummy file and it worked so I do not know why it does not here. Please check if it works on your ide">
+      <change beforePath="$PROJECT_DIR$/MyJavaFx/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/MyJavaFx/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,8 +170,17 @@
       <workItem from="1714942498462" duration="4453000" />
       <workItem from="1715163652811" duration="3887000" />
       <workItem from="1715167997573" duration="1409000" />
-      <workItem from="1715255086313" duration="5347000" />
+      <workItem from="1715255086313" duration="5662000" />
     </task>
+    <task id="LOCAL-00001" summary="scoreBoardDisplay.fxml will not display&#10;tempdisplayScoreBoard in BlackBoxApplication is being used to display this. If the .fxml file is replaced with menu.fxml it works. I have checked scoreBoardDisplay.fxml in a dummy file and it worked so I do not know why it does not here. Please check if it works on your ide">
+      <option name="closed" value="true" />
+      <created>1715262720931</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1715262720931</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,6 +196,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="scoreBoardDisplay.fxml will not display&#10;tempdisplayScoreBoard in BlackBoxApplication is being used to display this. If the .fxml file is replaced with menu.fxml it works. I have checked scoreBoardDisplay.fxml in a dummy file and it worked so I do not know why it does not here. Please check if it works on your ide" />
+    <option name="LAST_COMMIT_MESSAGE" value="scoreBoardDisplay.fxml will not display&#10;tempdisplayScoreBoard in BlackBoxApplication is being used to display this. If the .fxml file is replaced with menu.fxml it works. I have checked scoreBoardDisplay.fxml in a dummy file and it worked so I do not know why it does not here. Please check if it works on your ide" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
