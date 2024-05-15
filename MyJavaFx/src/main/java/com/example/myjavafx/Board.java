@@ -155,8 +155,8 @@ public class Board {
         //check ray absorbed
         if (hasAtom(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2])) {
             //return absorbed ray marker
-
-            drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
+            System.out.println("Absorbed");
+            drawRay(ray.getMarkerPos()[0], ray.getMarkerPos()[1], ray.getMarkerPos()[2], ray.getMarkerDir(), overlayPane, gridPane, Color.GRAY);
             //end of ray
             return;
         } else
@@ -167,14 +167,14 @@ public class Board {
             hasAtom(getRayLeftCellPos(ray)[0], getRayLeftCellPos(ray)[1], getRayLeftCellPos(ray)[2]) ||
             hasAtom(getRayRightCellPos(ray)[0], getRayRightCellPos(ray)[1], getRayRightCellPos(ray)[2])) {
                 //return reflected ray marker
-
-                drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
+                System.out.println("Reflected");
+                drawRay(ray.getMarkerPos()[0], ray.getMarkerPos()[1], ray.getMarkerPos()[2], ray.getMarkerDir(), overlayPane, gridPane, Color.WHITE);
                 //end of ray
                 return;
         }
 
         //start ray motion
-        drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
+        drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane, Color.RED);
         ray.move(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2]);
 
         while (inBoard(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2])) {
@@ -182,8 +182,8 @@ public class Board {
                 //check ray reflected 180deg
                 if (hasAtom(getRayRightCellPos(ray)[0], getRayRightCellPos(ray)[1], getRayRightCellPos(ray)[2])) {
                     //return ray reflected ray marker
-
-                    drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
+                    System.out.println("Reflected");
+                    drawRay(ray.getMarkerPos()[0], ray.getMarkerPos()[1], ray.getMarkerPos()[2], ray.getMarkerDir(), overlayPane, gridPane, Color.WHITE);
                     //end of ray
                     return;
                 } else
@@ -209,19 +209,19 @@ public class Board {
                 //check ray absorbed
                 if (hasAtom(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2])) {
                     //return absorbed ray marker
-
-                    drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
+                    System.out.println("Absorbed");
+                    drawRay(ray.getMarkerPos()[0], ray.getMarkerPos()[1], ray.getMarkerPos()[2], ray.getMarkerDir(), overlayPane, gridPane, Color.GRAY);
                     //stop ray
                     return;
                 }
 
             //move ray
-            drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
+            drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane, Color.RED);
             ray.move(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2]);
         }
         //return regular ray marker
-
-        drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane);
+        drawRay(ray.getMarkerPos()[0], ray.getMarkerPos()[1], ray.getMarkerPos()[2], ray.getMarkerDir(), overlayPane, gridPane, Color.GREEN);
+        drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane, Color.GREEN);
         //end of ray
         return;
     }
@@ -245,7 +245,7 @@ public class Board {
         }
     }
 
-    private void drawRay(int a, int r, int c, int direction, Pane overlayPane, GridPane gridPane)
+    private void drawRay(int a, int r, int c, int direction, Pane overlayPane, GridPane gridPane, Color color)
     {
         Polygon startHexagon = BlackBoxApplication.getHexagon(r * 2 + a, 2 * c + a, gridPane);//get target hexagon
 
@@ -278,7 +278,7 @@ public class Board {
                 throw new IllegalArgumentException("Direction Invalid");
         }
 
-        line.setStroke(Color.RED);
+        line.setStroke(color);
         line.setStrokeWidth(5);
         line.setStrokeLineCap(StrokeLineCap.ROUND);
         overlayPane.getChildren().add(line);
