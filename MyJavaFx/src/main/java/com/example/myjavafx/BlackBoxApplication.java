@@ -3,6 +3,7 @@ package com.example.myjavafx;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -16,11 +17,19 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class BlackBoxApplication extends Application {
 
     //Sets the default size of each hexagon
     private static final double HEXAGON_SIZE = 50;
-    private final int size; // Size variable
+    private final int size;// Size variable
+
+    //Amount of rays entered by the user
+    public int raysEntered = 0;
+
+    //Maximum number of rays allowed at this size of the board
+    public int maxNumOfRays = 1;
 
     public BlackBoxApplication(int size) {
         this.size = size;
@@ -78,34 +87,47 @@ public class BlackBoxApplication extends Application {
                     Integer loopRow = row, loopCol = col;
 
                     //hexagon clicked event
-                    if (board.isBorder(row % 2, row / 2, col))
-                    {
+                    if (board.isBorder(row % 2, row / 2, col)) {
                         hexagon.setFill(Color.GREEN);
                         hexagon.setOnMouseClicked(e -> {
                             clearBoard(board, gridPane, overlayPane);
                             for (int i = 0; i < 6; i++) {
                                 Integer j = i;
                                 int[] pos = board.getDirNeighbourPos(loopRow % 2, loopRow / 2, loopCol, i);
-                                if (pos != null && board.inBoard(pos[0], pos[1], pos[2]) && getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane) != null) {
-                                    
-                                    Paint prevColour = getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).getFill();
-                                    EventHandler<? super MouseEvent> prevEventHandler = getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).getOnMouseClicked();
-                                
-                                    getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setFill(Color.YELLOW);
-                                    getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setOnMouseClicked(f -> {
+                                if (pos != null && board.inBoard(pos[0], pos[1], pos[2]) && getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane) != null) {
+
+                                    Paint prevColour = getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).getFill();
+                                    EventHandler<? super MouseEvent> prevEventHandler = getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).getOnMouseClicked();
+
+                                    getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).setFill(Color.YELLOW);
+                                    getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).setOnMouseClicked(f -> {
                                         board.sendRay(loopRow % 2, loopRow / 2, loopCol, j, overlayPane, gridPane);
                                         System.out.println("sent ray from " + loopRow % 2 + "," + loopRow / 2 + "," + loopCol + " in direction " + j);
-                                    
-                                        getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setFill(prevColour);
-                                        getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setOnMouseClicked(prevEventHandler);
+
+                                        //increment the amount of rays entered by the user
+                                        raysEntered++;
+
+                                        getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).setFill(prevColour);
+                                        getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).setOnMouseClicked(prevEventHandler);
+
+                                        //Function checks that the user still has more rays to enter
+                                        //If not then we display the final score board
+                                        if (rayLimitMet()) {
+                                            try {
+                                                System.out.println("Testing *****************************************************");
+                                                displayScoreBoard(newStage);
+                                                //testDisplay(newStage);
+                                            } catch (Exception ex) {
+                                                //throw new RuntimeException(ex);
+                                            }
+                                        }
                                     });
                                 }
                             }
                         });
                     }
 
-                    if (board.hasAtom(loopRow % 2, loopRow / 2, loopCol))
-                    {
+                    if (board.hasAtom(loopRow % 2, loopRow / 2, loopCol)) {
                         hexagon.setFill(Color.RED);
                     }
 
@@ -132,7 +154,7 @@ public class BlackBoxApplication extends Application {
 
     //createHexagon creates the hexagon items to be displayed within the board
     //It is passed an x co-ordinate, a y co-ordinate and the radius or size of the hexagon
-    private Polygon createHexagon(double x, double y, double radius) {
+    public Polygon createHexagon(double x, double y, double radius) {
         //The hexagon is made using polygon objects
         Polygon hexagon = new Polygon();
         //We pivot or rotate the object so that it represents the hexagons with the point facing up
@@ -179,18 +201,15 @@ public class BlackBoxApplication extends Application {
         return node;
     }
 
-    public static void clearBoard(Board board, GridPane gridPane, Pane overlayPane)
-    {
+    public static void clearBoard(Board board, GridPane gridPane, Pane overlayPane) {
         int numRows = 2 * board.getSize();
         int numCols = 4 * board.getSize() - 2;
-    
-        for (int row = 0; row < numRows; row++)
-        {
-            for (int col = 0; col < numCols / 2; col++)
-            {
+
+        for (int row = 0; row < numRows; row++) {
+            for (int col = 0; col < numCols / 2; col++) {
                 //Get the hexagon for the current row and column
-                Polygon hexagon = getHexagon((row / 2)*2+(row % 2), 2*col+(row % 2), gridPane);
-    
+                Polygon hexagon = getHexagon((row / 2) * 2 + (row % 2), 2 * col + (row % 2), gridPane);
+
                 //Check if hexagon is not null before setting its fill color
                 if (hexagon != null) {
                     hexagon.setFill(Color.BLACK);
@@ -199,4 +218,62 @@ public class BlackBoxApplication extends Application {
         }
         overlayPane.getChildren().clear();
     }
+
+    public boolean rayLimitMet() {
+        //Checks if all the users rays have been entered
+
+        if (raysEntered >= maxNumOfRays) {
+            //Returns true if all the rays have been entered
+            return true;
+        }
+        //Returns false if there are still more rays to enter
+        else return false;
+
+    }
+
+
+    public void displayScoreBoard(Stage mainStage) {
+
+        Scene scoreBoardScene = tempdisplayScoreBoard(mainStage);
+
+        //Display the ScoreBoard
+        mainStage.setScene(scoreBoardScene);
+    }
+
+    private Scene tempdisplayScoreBoard(Stage mainStage) {
+
+        Pane root = new Pane();
+
+        // Load the FXML file
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("scoreBoardDisplay.fxml"));
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle any exceptions related to loading the FXML file
+        }
+
+        //Pane scorePane = (Pane) scoreRoot;
+        root.setStyle("-fx-background-color: Black;");
+
+        // Create a new Scene using the root node
+        Scene scoreBoardScene = new Scene(root, 848, 631);
+
+        // Set the title of the stage
+        mainStage.setTitle("BlackBox+.ScoreBoard");
+
+        return scoreBoardScene;
+    }
+
+    public void testDisplay(Stage mainStage){
+        mainStage.close();
+
+        ScoreBoardController newBoard= new ScoreBoardController();
+        try {
+            newBoard.start(new Stage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

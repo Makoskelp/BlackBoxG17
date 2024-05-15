@@ -9,7 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-    //This class is to create and run the menu
+import java.util.Objects;
+
+//This class is to create and run the menu
 
 public class menuController extends Application {
 
@@ -21,7 +23,7 @@ public class menuController extends Application {
     @Override
     public void start(Stage newStage) throws Exception {
         //Accesses the menu.fxml file
-        Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("menu.fxml")));
 
         boardStage = newStage;
         boardStage.setTitle("BlackBox+");
