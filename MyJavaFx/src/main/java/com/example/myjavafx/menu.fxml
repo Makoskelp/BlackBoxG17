@@ -11,20 +11,17 @@
       <Cursor fx:constant="DEFAULT" />
    </cursor>
    <children>
-      <Label layoutX="310.0" layoutY="90.0" text="BlackBox2+" textFill="#ddff02">
+      <Label layoutX="310.0" layoutY="90.0" text="BlackBox+" textFill="#ddff02">
          <font>
             <Font name="Arial" size="48.0" />
          </font>
       </Label>
       <!--This myTextField is used to recieve user input-->
       <!--Once enter is pressed it calls the onEnter file in menuController-->
-      <TextField fx:id="myTextField" layoutX="472.0" layoutY="268.0" onAction="#onEnter" prefHeight="62.0" prefWidth="167.0">
+      <TextField fx:id="myTextField" layoutX="449.0" layoutY="211.0" onAction="#onEnter" prefHeight="29.0" prefWidth="66.0" />
+      <Label layoutX="310.0" layoutY="206.0" text="Grid size:" textFill="#ddff02">
          <font>
-            <Font size="45.0" />
-         </font></TextField>
-      <Label layoutX="143.0" layoutY="290.0" text="Grid size:" textFill="#ddff02">
-         <font>
-            <Font name="Arial" size="45.0" />
+            <Font name="Arial" size="33.0" />
          </font>
       </Label>
    </children>
