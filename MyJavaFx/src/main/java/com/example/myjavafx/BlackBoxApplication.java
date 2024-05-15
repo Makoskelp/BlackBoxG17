@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 
 public class BlackBoxApplication extends Application {
@@ -81,26 +82,38 @@ public class BlackBoxApplication extends Application {
                     if (board.isBorder(row % 2, row / 2, col))
                     {
                         hexagon.setFill(Color.GREEN);
-                        hexagon.setOnMouseClicked(e -> {
-                            clearBoard(board, gridPane, overlayPane);
-                            for (int i = 0; i < 6; i++) {
-                                Integer j = i;
-                                int[] pos = board.getDirNeighbourPos(loopRow % 2, loopRow / 2, loopCol, i);
-                                if (pos != null && board.inBoard(pos[0], pos[1], pos[2]) && getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane) != null) {
+                        hexagon.setOnMousePressed(e -> {
+                            if (e.getButton() == MouseButton.SECONDARY) {
+                                hexagon.setFill(Color.ORANGE);
+                            }
+                            else
+                            {
+                                clearBoard(board, gridPane, overlayPane);
+                                for (int i = 0; i < 6; i++) {
+                                    Integer j = i;
+                                    int[] pos = board.getDirNeighbourPos(loopRow % 2, loopRow / 2, loopCol, i);
+                                    if (pos != null && board.inBoard(pos[0], pos[1], pos[2]) && getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane) != null) {
+                                        
+                                        Paint prevColour = getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).getFill();
+                                        EventHandler<? super MouseEvent> prevEventHandler = getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).getOnMousePressed();
                                     
-                                    Paint prevColour = getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).getFill();
-                                    EventHandler<? super MouseEvent> prevEventHandler = getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).getOnMouseClicked();
-                                
-                                    getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setFill(Color.YELLOW);
-                                    getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setOnMouseClicked(f -> {
-                                        board.sendRay(loopRow % 2, loopRow / 2, loopCol, j, overlayPane, gridPane);
-                                        System.out.println("sent ray from " + loopRow % 2 + "," + loopRow / 2 + "," + loopCol + " in direction " + j);
-                                    
-                                        getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setFill(prevColour);
-                                        getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setOnMouseClicked(prevEventHandler);
-                                    });
+                                        getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setFill(Color.YELLOW);
+                                        getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setOnMousePressed(f -> {
+                                            board.sendRay(loopRow % 2, loopRow / 2, loopCol, j, overlayPane, gridPane);
+                                            System.out.println("sent ray from " + loopRow % 2 + "," + loopRow / 2 + "," + loopCol + " in direction " + j);
+                                        
+                                            getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setFill(prevColour);
+                                            getHexagon(pos[1]*2+pos[0], 2*pos[2]+pos[0], gridPane).setOnMousePressed(prevEventHandler);
+                                        });
+                                    }
                                 }
                             }
+                        });
+                    }
+                    else    
+                    {
+                        hexagon.setOnMousePressed(e -> {
+                            hexagon.setFill(Color.ORANGE);
                         });
                     }
 
