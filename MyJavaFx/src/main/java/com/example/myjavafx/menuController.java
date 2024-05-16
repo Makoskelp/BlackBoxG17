@@ -46,9 +46,12 @@ public class menuController extends Application {
         //size takes the values of the myTextField which is set by the user
         int size = Integer.parseInt(myTextField.getText());
         //closes the current stage
-        boardStage.close();
-        BlackBoxApplication board1 = new BlackBoxApplication(size);
-        //starts the display of the board
-        board1.start(new Stage());
+        if(size >= 4 && size <= 7)
+        {
+            boardStage.close();
+            BlackBoxApplication board1 = new BlackBoxApplication(size);
+            //starts the display of the board
+            board1.start(new Stage());
+        }
     }
 }

@@ -62,13 +62,30 @@ public class BlackBoxApplication extends Application {
                     if (board.isBorder(row % 2, row / 2, col)) {
                         hexagon.setFill(Color.GREEN);
                         hexagon.setOnMousePressed(e -> {
-                            if (e.getButton() == MouseButton.SECONDARY && guessesMade < size) {
-                                guessesMade++;
-                                hexagon.setFill(Color.ORANGE);
-                                if (!board.hasAtom(loopRow % 2, loopRow / 2, loopCol)) {
-                                    score += 5;
+                            if (e.getButton() == MouseButton.SECONDARY)
+                            {
+                                if(hexagon.getFill() != Color.ORANGE)
+                                {
+                                    if(guessesMade < size)
+                                    {
+                                        guessesMade++;
+                                        hexagon.setFill(Color.ORANGE);
+                                        if (!board.hasAtom(loopRow % 2, loopRow / 2, loopCol)) {
+                                            score += 5;
+                                        }
+                                    }   
                                 }
-                            } else {
+                                else
+                                {
+                                    guessesMade--;
+                                    hexagon.setFill(Color.BLACK);
+                                    if (!board.hasAtom(loopRow % 2, loopRow / 2, loopCol)) {
+                                        score -= 5;
+                                    }
+                                }
+                            }
+                            else
+                            {
                                 clearBoard(board, gridPane, rayPane);
                                 for (int i = 0; i < 6; i++) {
                                     Integer j = i;
@@ -77,16 +94,16 @@ public class BlackBoxApplication extends Application {
                                         Polygon thisHex = getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane);
 
                                         Paint prevColour = thisHex.getFill();
-                                        EventHandler<? super MouseEvent> prevEventHandler = thisHex.getOnMouseClicked();
+                                        EventHandler<? super MouseEvent> prevEventHandler = thisHex.getOnMousePressed();
 
                                         if(thisHex.getFill() != Color.ORANGE)
                                         thisHex.setFill(Color.YELLOW);
-                                        thisHex.setOnMouseClicked(f -> {
+                                        thisHex.setOnMousePressed(f -> {
                                             board.sendRay(loopRow % 2, loopRow / 2, loopCol, j, rayPane, gridPane);
                                             System.out.println("sent ray from " + loopRow % 2 + "," + loopRow / 2 + "," + loopCol + " in direction " + j);
                                             if(thisHex.getFill() != Color.ORANGE)
                                             thisHex.setFill(prevColour);
-                                            thisHex.setOnMouseClicked(prevEventHandler);
+                                            thisHex.setOnMousePressed(prevEventHandler);
                                             score++;
                                         });
                                     }
@@ -95,18 +112,38 @@ public class BlackBoxApplication extends Application {
                         });
                     } else {
                         hexagon.setOnMousePressed(e -> {
-                            if (e.getButton() == MouseButton.SECONDARY && guessesMade < size) {
-                                guessesMade++;
-                                System.out.println(guessesMade);
-                                hexagon.setFill(Color.ORANGE);
-                                if (!board.hasAtom(loopRow % 2, loopRow / 2, loopCol)) {
-                                    score += 50;
+                            if (e.getButton() == MouseButton.SECONDARY)
+                            {
+                                if(hexagon.getFill() != Color.ORANGE)
+                                {
+                                    if(guessesMade < size)
+                                    {
+                                        guessesMade++;
+                                        hexagon.setFill(Color.ORANGE);
+                                        if (!board.hasAtom(loopRow % 2, loopRow / 2, loopCol)) {
+                                            score += 5;
+                                        }
+                                    }   
+                                }
+                                else
+                                {
+                                    guessesMade--;
+                                    hexagon.setFill(Color.BLACK);
+                                    if (!board.hasAtom(loopRow % 2, loopRow / 2, loopCol)) {
+                                        score -= 5;
+                                    }
                                 }
                             }
                         });
                     }
 
                     gridPane.add(hexagon, 2 * col + row % 2, row);
+
+                    // TEST - show genarated atoms
+                    if(board.hasAtom(loopRow % 2, loopRow / 2, loopCol))
+                    {
+                        hexagon.setFill(Color.RED);
+                    }
                 }
             }
         }
@@ -123,7 +160,24 @@ public class BlackBoxApplication extends Application {
             if (guessesMade < size) {
                 messageLabel.setText("Please make " + size + " guesses");
             } else {
+                for (int row = 0; row < numRows; row++) {
+                    for (int col = 0; col < numCols / 2; col++) {
+                        Polygon hexagon = getHexagon((row / 2) * 2 + (row % 2), 2 * col + (row % 2), gridPane);
+                        if (hexagon != null) {
+                            hexagon.setFill(Color.BLACK);
+                        }
+                    }
+                }
                 messageLabel.setText("Score: " + score);
+                for (int row = 0; row < numRows; row++) {
+                    for (int col = 0; col < numCols / 2; col++) {
+                        Polygon hexagon = getHexagon((row / 2) * 2 + (row % 2), 2 * col + (row % 2), gridPane);
+                        if(board.hasAtom(row % 2, row / 2, col))
+                        {
+                            hexagon.setFill(Color.RED);
+                        }
+                    }
+                }
             }
         });
 
