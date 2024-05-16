@@ -64,7 +64,6 @@ public class BlackBoxApplication extends Application {
                         hexagon.setOnMousePressed(e -> {
                             if (e.getButton() == MouseButton.SECONDARY && guessesMade < size) {
                                 guessesMade++;
-                                System.out.println(guessesMade);
                                 hexagon.setFill(Color.ORANGE);
                                 if (!board.hasAtom(loopRow % 2, loopRow / 2, loopCol)) {
                                     score += 5;
