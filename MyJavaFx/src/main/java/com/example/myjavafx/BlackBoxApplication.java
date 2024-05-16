@@ -155,7 +155,7 @@ public class BlackBoxApplication extends Application {
         messageLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: white;"); // Setting font size and text color
 
 
-        Button button = new Button("Click Me"); // Creating a button with text "Click Me"
+        Button button = new Button("FINISH");
         button.setOnAction(e -> {
             if (guessesMade < size) {
                 messageLabel.setText("Please make " + size + " guesses");
@@ -178,6 +178,7 @@ public class BlackBoxApplication extends Application {
                         }
                     }
                 }
+                rayPane.getChildren().clear();
             }
         });
 
