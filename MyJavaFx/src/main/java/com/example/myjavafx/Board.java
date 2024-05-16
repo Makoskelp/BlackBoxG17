@@ -133,19 +133,19 @@ public class Board {
     }
 
     private int[] getRayRightCellPos(Ray r) {
-        return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], (r.getDirection() + 1) % 6);
+        return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], Math.floorMod(r.getDirection() + 1, 6));
     }
 
     private int[] getRayLeftCellPos(Ray r) {
-        return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], (r.getDirection() - 1) % 6);
+        return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], Math.floorMod(r.getDirection() - 1, 6));
     }
 
     private int[] getRayBackRightCellPos(Ray r) {
-        return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], (r.getDirection() + 2) % 6);
+        return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], Math.floorMod(r.getDirection() + 2, 6));
     }
 
     private int[] getRayBackLeftCellPos(Ray r) {
-        return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], (r.getDirection() - 2) % 6);
+        return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], Math.floorMod(r.getDirection() - 2, 6));
     }
 
     public void sendRay(int a, int r, int c, int dir, Pane overlayPane, GridPane gridPane) {

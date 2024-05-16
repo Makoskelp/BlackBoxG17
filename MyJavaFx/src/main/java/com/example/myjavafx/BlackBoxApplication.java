@@ -100,7 +100,7 @@ public class BlackBoxApplication extends Application {
                                 System.out.println(guessesMade);
                                 hexagon.setFill(Color.ORANGE);
                                 if (!board.hasAtom(loopRow % 2, loopRow / 2, loopCol)) {
-                                    score += 5;
+                                    score += 50;
                                 }
                             }
                         });

@@ -11,7 +11,7 @@ public class Ray {
         markerPos[1] = pos[1] = r;
         markerPos[2] = pos[2] = c;
         direction = dir;
-        markerDir = (dir + 3) % 6;
+        markerDir = Math.floorMod(dir + 3, 6);
     }
 
     public int[] getCurrentPosition() {
@@ -32,7 +32,7 @@ public class Ray {
 
     //amount = how many times to turn right 60deg; negative numbers turn left
     public void rotate(int amount) {
-        direction = (direction + amount) % 6;
+        direction = Math.floorMod(direction + amount, 6);
     }
 
     //updates position
