@@ -263,7 +263,8 @@ public class Board {
 
         double centerX = startHexagon.getBoundsInParent().getCenterX();//get center x coordinate
         double centerY = startHexagon.getBoundsInParent().getCenterY();//get center y coordinate
-        double length  = BlackBoxApplication.getHexagon(1 * 2 + 1, 2 * (1+1) + 1, gridPane).getBoundsInParent().getCenterX() - BlackBoxApplication.getHexagon(1 * 2 + 1, 2 * 1 + 1, gridPane).getBoundsInParent().getCenterX();//test to find length between hexagon centers
+        double length  = BlackBoxApplication.getHexagon(1 * 2 + 1, 2 * (1+1) + 1, gridPane).getBoundsInParent().getCenterX()
+                        - BlackBoxApplication.getHexagon(1 * 2 + 1, 2 * 1 + 1, gridPane).getBoundsInParent().getCenterX();//test to find length between hexagon centers
 
         Line line;
         switch (direction)
