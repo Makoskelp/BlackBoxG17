@@ -22,9 +22,8 @@ import javafx.stage.Stage;
 
 public class BlackBoxApplication extends Application {
 
-    // Sets the default size of each hexagon
     private static final double HEXAGON_SIZE = 50;
-    private final int size; // Size variable
+    private final int size;
     private int score = 0;
     private int guessesMade = 0;
 
@@ -40,8 +39,8 @@ public class BlackBoxApplication extends Application {
         Scene scene = new Scene(gridPane);
 
         Pane rayPane = new Pane();
-        rayPane.setMouseTransparent(true); // Make the overlay pane transparent to mouse events
-        scene.setRoot(new StackPane(gridPane, rayPane)); // Add both gridPane and rayPane to the scene
+        rayPane.setMouseTransparent(true);
+        scene.setRoot(new StackPane(gridPane, rayPane));
 
         gridPane.setStyle("-fx-background-color: black;");
 
@@ -140,22 +139,23 @@ public class BlackBoxApplication extends Application {
                     gridPane.add(hexagon, 2 * col + row % 2, row);
 
                     // TEST - show genarated atoms
-                    if(board.hasAtom(loopRow % 2, loopRow / 2, loopCol))
-                    {
-                        hexagon.setFill(Color.RED);
-                    }
+                    // if(board.hasAtom(loopRow % 2, loopRow / 2, loopCol))
+                    // {
+                    //     hexagon.setFill(Color.RED);
+                    // }
                 }
             }
         }
 
-        Label messageLabel = new Label("Welcome"); // Creating a label with default text
-        // Adding the label above the button with alignment and styling
-        gridPane.add(messageLabel, 0, numRows - 3, numCols, 1); // Spanning across all columns
-        GridPane.setHalignment(messageLabel, HPos.LEFT); // Aligning label text to the center
-        messageLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: white;"); // Setting font size and text color
+        Label messageLabel = new Label("Welcome");
+
+        gridPane.add(messageLabel, 0, numRows - 3, numCols, 1);
+        GridPane.setHalignment(messageLabel, HPos.LEFT);
+        messageLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: white;");
 
 
-        Button button = new Button("FINISH");
+        Button button = new Button("Finish");
+        Button playAgain = new Button("Play Again");
         button.setOnAction(e -> {
             if (guessesMade < size) {
                 messageLabel.setText("Please make " + size + " guesses");
@@ -179,13 +179,18 @@ public class BlackBoxApplication extends Application {
                     }
                 }
                 rayPane.getChildren().clear();
+                gridPane.add(playAgain, 2, numRows + 1);
             }
         });
 
-        // Add the button to the layout (GridPane in your case)
-        gridPane.add(button, 0, numRows + 1); // Adding the button below the gridPane
+        playAgain.setOnAction(e -> {
+            BlackBoxApplication board2 = new BlackBoxApplication(size);
+            newStage.close();
+            board2.start(new Stage());
+        });
 
-        // Set padding for the GridPane
+        gridPane.add(button, 0, numRows + 1);
+
         gridPane.setPadding(new Insets(50, 75, 50, 50));
 
         gridPane.setHgap(-1.15 * HEXAGON_SIZE - 2.5);
