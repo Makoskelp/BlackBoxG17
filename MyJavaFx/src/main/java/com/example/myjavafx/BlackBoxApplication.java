@@ -74,16 +74,19 @@ public class BlackBoxApplication extends Application {
                                     Integer j = i;
                                     int[] pos = board.getDirNeighbourPos(loopRow % 2, loopRow / 2, loopCol, i);
                                     if (pos != null && board.inBoard(pos[0], pos[1], pos[2]) && getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane) != null) {
+                                        Polygon thisHex = getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane);
 
-                                        Paint prevColour = getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).getFill();
-                                        EventHandler<? super MouseEvent> prevEventHandler = getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).getOnMouseClicked();
+                                        Paint prevColour = thisHex.getFill();
+                                        EventHandler<? super MouseEvent> prevEventHandler = thisHex.getOnMouseClicked();
 
-                                        getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).setFill(Color.YELLOW);
-                                        getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).setOnMouseClicked(f -> {
+                                        if(thisHex.getFill() != Color.ORANGE)
+                                        thisHex.setFill(Color.YELLOW);
+                                        thisHex.setOnMouseClicked(f -> {
                                             board.sendRay(loopRow % 2, loopRow / 2, loopCol, j, rayPane, gridPane);
                                             System.out.println("sent ray from " + loopRow % 2 + "," + loopRow / 2 + "," + loopCol + " in direction " + j);
-                                            getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).setFill(prevColour);
-                                            getHexagon(pos[1] * 2 + pos[0], 2 * pos[2] + pos[0], gridPane).setOnMouseClicked(prevEventHandler);
+                                            if(thisHex.getFill() != Color.ORANGE)
+                                            thisHex.setFill(prevColour);
+                                            thisHex.setOnMouseClicked(prevEventHandler);
                                             score++;
                                         });
                                     }
@@ -173,7 +176,7 @@ public class BlackBoxApplication extends Application {
         for (int row = 0; row < numRows; row++) {
             for (int col = 0; col < numCols / 2; col++) {
                 Polygon hexagon = getHexagon((row / 2) * 2 + (row % 2), 2 * col + (row % 2), gridPane);
-                if (hexagon != null) {
+                if (hexagon != null && hexagon.getFill() != Color.ORANGE) {
                     hexagon.setFill(Color.BLACK);
                 }
             }
