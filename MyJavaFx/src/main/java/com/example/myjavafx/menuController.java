@@ -11,18 +11,17 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
-//This class is to create and run the menu
+//this class is to create and run the start menu
 
 public class menuController extends Application {
 
     //boardStage is the javafx stage that is used to display the menu
-    //If this is just displaying the menu should we change the name?
     private static Stage boardStage;
 
-    //Start function is the first function ran
+    //start function is the first function ran
     @Override
     public void start(Stage newStage) throws Exception {
-        //Accesses the menu.fxml file
+        //accesses the menu.fxml file
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("menu.fxml")));
 
         boardStage = newStage;
@@ -34,13 +33,13 @@ public class menuController extends Application {
     @FXML
     private TextField myTextField;
 
-    //Main method should be ignored if the javafx file is set up correct
-    //Start method should always run first
+    //main method should be ignored if the javafx file is set up correct
+    //start method should always run first
     public static void main(String[] args) {
         launch();
     }
 
-    //This Function is called when the user clicks enter
+    //this function is called when the user presses enter
     @FXML
     public void onEnter(ActionEvent ae) {
         //size takes the values of the myTextField which is set by the user

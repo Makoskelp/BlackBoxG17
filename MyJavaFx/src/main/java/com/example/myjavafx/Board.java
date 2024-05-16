@@ -9,21 +9,22 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeLineCap;
 
-//Board represents the board as an object
+//Board represents the board as an object that can be modified with methods
 public class Board {
 
+    //the array of cells in the board, also gives coordinate system
     private Cell[][][] board;
+    //how many cells are on each edge of the hexagonal board
     private int size;
 
     public Board(int sideLength) {
-        //Checks to see if the length of the board is equal or less than 0
-        //If these board does not have a size or a negative size, we throw an exception
+        //we can't have a negative amount of cells
         if (sideLength <= 0) {
             throw new IllegalArgumentException("The board must have a positive size");
         }
 
         size = sideLength;
-        //The board is created using the multiple cells
+        //The array is created to the appropriate size to fit the cells
         board = new Cell[2][size][2 * size - 1];
 
         //Creates the top half of board
@@ -47,13 +48,14 @@ public class Board {
         return size;
     }
 
-    //inBoard checks to see if a specific co-ordinate is within the boards boundaries
+    //inBoard checks to see whether a specific coordinate is a cell or off the board
     public boolean inBoard(int a, int r, int c) {
         if (a >= 0 && a <= 1 && r >= 0 && r <= size - a && c >= 0 && c < 2 * size - 1 && board[a][r][c] != null) {
             return true;
         } else return false;
     }
 
+    //adds an atom to a cell at the coordinate, safe from invalid coordinates
     public void setAtom(int a, int r, int c, boolean value) {
         if (!inBoard(a, r, c)) {
             throw new IllegalArgumentException("Not a valid cell");
@@ -62,6 +64,7 @@ public class Board {
         board[a][r][c].setAtom(value);
     }
 
+    //checks if the cell at this coordinate has an atom
     public boolean hasAtom(int a, int r, int c) {
         if (!inBoard(a, r, c)) {
             return false;
@@ -70,6 +73,7 @@ public class Board {
         return board[a][r][c].hasAtom();
     }
 
+    //checks if the cell at this coordinate can have a ray sent starting here
     public boolean isBorder(int a, int r, int c) {
         if (!inBoard(a, r, c)) {
             throw new IllegalArgumentException("Not a valid cell");
@@ -78,44 +82,45 @@ public class Board {
         return board[a][r][c].isBorder();
     }
 
+    //gets the coordinates of the cell bordering the given coordinate in the specified direction
     public int[] getDirNeighbourPos(int a, int r, int c, int dir) {
         switch (dir) {
-            case 0:
+            case 0://up right
                 if (inBoard(1 - a, r - (1 - a), c + a) && c + a <= 2 * size - 1 && r - (1 - a) >= 0) {
                     int[] pos = {1 - a, r - (1 - a), c + a};
                     return pos;
                 } else {
                     return new int[] {0,0,0};
                 }
-            case 1:
+            case 1://right
                 if (c < 2 * size - 1 && inBoard(a, r, c + 1)) {
                     int[] pos = {a, r, c + 1};
                     return pos;
                 } else {
                     return new int[] {0,0,0};
                 }
-            case 2:
+            case 2://down right
                 if (inBoard(1 - a, r + a, c + a) && c + a <= 2 * size - 1 && r + a < size - a) {
                     int[] pos = {1 - a, r + a, c + a};
                     return pos;
                 } else {
                     return new int[] {0,0,0};
                 }
-            case 3:
+            case 3://down left
                 if (inBoard(1 - a, r + a, c - (1 - a)) && c - (1 - a) >= 0 && r + a < size - a) {
                     int[] pos = {1 - a, r + a, c - (1 - a)};
                     return pos;
                 } else {
                     return new int[] {0,0,0};
                 }
-            case 4:
+            case 4://left
                 if (c > 0 && inBoard(a, r, c)) {
                     int[] pos = {a, r, c - 1};
                     return pos;
                 } else {
                     return new int[] {0,0,0};
                 }
-            case 5:
+            case 5://up left
                 if (inBoard(1 - a, r - (1 - a), c - (1 - a)) && c - (1 - a) >= 0 && r - (1 - a) >= 0) {
                     int[] pos = {1 - a, r - (1 - a), c - (1 - a)};
                     return pos;
@@ -124,10 +129,12 @@ public class Board {
                 }
 
             default:
+                //in case we can't give a valid coordinate, we return one that's guaranteed not inBoard
                 return new int[] {0,0,0};
         }
     }
 
+    //private functions to clean up code below
     private int[] getRayForwardCellPos(Ray r) {
         return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], r.getDirection());
     }
@@ -148,7 +155,9 @@ public class Board {
         return getDirNeighbourPos(r.getCurrentPosition()[0], r.getCurrentPosition()[1], r.getCurrentPosition()[2], Math.floorMod(r.getDirection() - 2, 6));
     }
 
+    //sends and prints a ray from the given coordinate in the given direction, also prints raymarkers
     public void sendRay(int a, int r, int c, int dir, Pane overlayPane, GridPane gridPane) {
+        //starts the ray and clears the board
         Ray ray = new Ray(a, r, c, dir);
         BlackBoxApplication.clearBoard(this, gridPane, overlayPane);
 
@@ -174,7 +183,7 @@ public class Board {
         }
 
         //start ray motion
-        drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane, Color.RED);
+        drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane, Color.RED); //optional
         ray.move(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2]);
 
         while (inBoard(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2])) {
@@ -216,7 +225,7 @@ public class Board {
                 }
 
             //move ray
-            drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane, Color.RED);
+            drawRay(ray.getCurrentPosition()[0], ray.getCurrentPosition()[1], ray.getCurrentPosition()[2], ray.getDirection(), overlayPane, gridPane, Color.RED);//optional
             ray.move(getRayForwardCellPos(ray)[0], getRayForwardCellPos(ray)[1], getRayForwardCellPos(ray)[2]);
         }
         //return regular ray marker
@@ -226,10 +235,12 @@ public class Board {
         return;
     }
 
+    //populates the board with atoms in a random configuration
     public void createRandAtoms() {
 
         Random rand = new Random();
 
+        //the amount of atoms is equal to the size of the board, so the atom density is somewhat preserved at different board sizes
         for (int i = 0; i < size; i++) {
 
             int num1 = rand.nextInt(0, 1);
@@ -245,6 +256,7 @@ public class Board {
         }
     }
 
+    //prints a ray going from the centre of the given cell to the centre of the neighbour in the given direction, with a variable colour
     private void drawRay(int a, int r, int c, int direction, Pane overlayPane, GridPane gridPane, Color color)
     {
         Polygon startHexagon = BlackBoxApplication.getHexagon(r * 2 + a, 2 * c + a, gridPane);//get target hexagon

@@ -6,28 +6,28 @@ package com.example.myjavafx;
 
 public class Cell {
 
-    //hasAtom is a boolean variable which states if there is an atom inside this cell
+    //stores whether the cell has an atom in it
     private boolean hasAtom;
 
-    //isBorder is a boolean variable which states whether the cell is at the edge of the board
+    //stores whether the cell is at the edge of the board and a ray can be sent starting from this cell
     private boolean isBorder;
 
-    //Returns the value of hasAtom
+    //for public access
     public boolean hasAtom() {
         return hasAtom;
     }
 
-    //Used to add an atom into this cell
+    //used to add an atom into the cell
     public void setAtom(boolean value) {
         hasAtom = value;
     }
 
-    //Returns the value of isBorder
+    //for public access
     public boolean isBorder() {
         return isBorder;
     }
 
-    //The default creation of this object has hasAtom set to false
+    //the default cell does not have an atom
     public Cell(boolean border) {
         hasAtom = false;
         isBorder = border;
