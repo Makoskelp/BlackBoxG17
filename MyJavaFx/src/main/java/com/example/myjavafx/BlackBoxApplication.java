@@ -119,7 +119,7 @@ public class BlackBoxApplication extends Application {
                                         //send ray when clicked
                                         thisHex.setOnMousePressed(f -> {
                                             board.sendRay(loopRow % 2, loopRow / 2, loopCol, j, rayPane, gridPane);
-                                            System.out.println("sent ray from " + loopRow % 2 + "," + loopRow / 2 + "," + loopCol + " in direction " + j);//optional
+                                            //(debug) System.out.println("sent ray from " + loopRow % 2 + "," + loopRow / 2 + "," + loopCol + " in direction " + j);
                                             //return to previous behaviour
                                             if(thisHex.getFill() != Color.ORANGE)
                                             thisHex.setFill(prevColour);
