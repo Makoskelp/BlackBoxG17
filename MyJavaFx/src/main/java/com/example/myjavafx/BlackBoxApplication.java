@@ -40,11 +40,15 @@ public class BlackBoxApplication extends Application {
         //setup the scene
         newStage.setTitle("BlackBox+");
 
+        //pane to display hexagonal grid
         GridPane gridPane = new GridPane();
+
+        //seperate pane for rays, prevents formatting issues
+        Pane rayPane = new Pane();
+
         Scene scene = new Scene(gridPane);
 
-        Pane rayPane = new Pane();
-        rayPane.setMouseTransparent(true);
+        rayPane.setMouseTransparent(true); //rays not clickable
         scene.setRoot(new StackPane(gridPane, rayPane));
 
         gridPane.setStyle("-fx-background-color: black;");

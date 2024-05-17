@@ -41,6 +41,8 @@ public class Board {
                 board[i % 2][i / 2][j] = new Cell(i == 2 * size - 2 || j == lineStart || j == lineStart + 3 * size - 3 - i);
             }
         }
+
+        //top half and bottom half of hexagonal grid need to be generated differently
     }
 
     //Returns the size of the board
