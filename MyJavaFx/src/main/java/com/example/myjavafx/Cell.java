@@ -4,6 +4,8 @@ package com.example.myjavafx;
     //Cell is used to represent each hexagon
 
 
+
+
 public class Cell {
 
     //stores whether the cell has an atom in it

@@ -37,7 +37,7 @@ public class BlackBoxApplication extends Application {
 
     @Override
     public void start(Stage newStage) {
-        //setup
+        //setup the scene
         newStage.setTitle("BlackBox+");
 
         GridPane gridPane = new GridPane();
